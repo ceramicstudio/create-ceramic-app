@@ -16,39 +16,39 @@ oclif example Hello World CLI
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g cli
-$ create-ceramic-app COMMAND
+$ npm install -g create-ceramic
+$ create-ceramic COMMAND
 running command...
-$ create-ceramic-app (--version)
-cli/0.0.0 darwin-arm64 node-v16.4.2
-$ create-ceramic-app --help [COMMAND]
+$ create-ceramic (--version)
+create-ceramic/0.0.0 darwin-arm64 node-v16.4.2
+$ create-ceramic --help [COMMAND]
 USAGE
-  $ create-ceramic-app COMMAND
+  $ create-ceramic COMMAND
 ...
 ```
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`create-ceramic-app hello PERSON`](#create-ceramic-app-hello-person)
-* [`create-ceramic-app hello world`](#create-ceramic-app-hello-world)
-* [`create-ceramic-app help [COMMAND]`](#create-ceramic-app-help-command)
-* [`create-ceramic-app plugins`](#create-ceramic-app-plugins)
-* [`create-ceramic-app plugins:install PLUGIN...`](#create-ceramic-app-pluginsinstall-plugin)
-* [`create-ceramic-app plugins:inspect PLUGIN...`](#create-ceramic-app-pluginsinspect-plugin)
-* [`create-ceramic-app plugins:install PLUGIN...`](#create-ceramic-app-pluginsinstall-plugin-1)
-* [`create-ceramic-app plugins:link PLUGIN`](#create-ceramic-app-pluginslink-plugin)
-* [`create-ceramic-app plugins:uninstall PLUGIN...`](#create-ceramic-app-pluginsuninstall-plugin)
-* [`create-ceramic-app plugins:uninstall PLUGIN...`](#create-ceramic-app-pluginsuninstall-plugin-1)
-* [`create-ceramic-app plugins:uninstall PLUGIN...`](#create-ceramic-app-pluginsuninstall-plugin-2)
-* [`create-ceramic-app plugins update`](#create-ceramic-app-plugins-update)
+* [`create-ceramic hello PERSON`](#create-ceramic-hello-person)
+* [`create-ceramic hello world`](#create-ceramic-hello-world)
+* [`create-ceramic help [COMMAND]`](#create-ceramic-help-command)
+* [`create-ceramic plugins`](#create-ceramic-plugins)
+* [`create-ceramic plugins:install PLUGIN...`](#create-ceramic-pluginsinstall-plugin)
+* [`create-ceramic plugins:inspect PLUGIN...`](#create-ceramic-pluginsinspect-plugin)
+* [`create-ceramic plugins:install PLUGIN...`](#create-ceramic-pluginsinstall-plugin-1)
+* [`create-ceramic plugins:link PLUGIN`](#create-ceramic-pluginslink-plugin)
+* [`create-ceramic plugins:uninstall PLUGIN...`](#create-ceramic-pluginsuninstall-plugin)
+* [`create-ceramic plugins:uninstall PLUGIN...`](#create-ceramic-pluginsuninstall-plugin-1)
+* [`create-ceramic plugins:uninstall PLUGIN...`](#create-ceramic-pluginsuninstall-plugin-2)
+* [`create-ceramic plugins update`](#create-ceramic-plugins-update)
 
-## `create-ceramic-app hello PERSON`
+## `create-ceramic hello PERSON`
 
 Say hello
 
 ```
 USAGE
-  $ create-ceramic-app hello [PERSON] -f <value>
+  $ create-ceramic hello [PERSON] -f <value>
 
 ARGUMENTS
   PERSON  Person to say hello to
@@ -64,15 +64,15 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/ceramicstudio/hello-world/blob/v0.0.0/dist/commands/hello/index.ts)_
+_See code: [dist/commands/hello/index.ts](https://github.com/Sterahi/hello-world/blob/v0.0.0/dist/commands/hello/index.ts)_
 
-## `create-ceramic-app hello world`
+## `create-ceramic hello world`
 
 Say hello world
 
 ```
 USAGE
-  $ create-ceramic-app hello world
+  $ create-ceramic hello world
 
 DESCRIPTION
   Say hello world
@@ -82,13 +82,13 @@ EXAMPLES
   hello world! (./src/commands/hello/world.ts)
 ```
 
-## `create-ceramic-app help [COMMAND]`
+## `create-ceramic help [COMMAND]`
 
-Display help for create-ceramic-app.
+Display help for create-ceramic.
 
 ```
 USAGE
-  $ create-ceramic-app help [COMMAND] [-n]
+  $ create-ceramic help [COMMAND] [-n]
 
 ARGUMENTS
   COMMAND  Command to show help for.
@@ -97,18 +97,18 @@ FLAGS
   -n, --nested-commands  Include all nested commands in the output.
 
 DESCRIPTION
-  Display help for create-ceramic-app.
+  Display help for create-ceramic.
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.10/src/commands/help.ts)_
 
-## `create-ceramic-app plugins`
+## `create-ceramic plugins`
 
 List installed plugins.
 
 ```
 USAGE
-  $ create-ceramic-app plugins [--core]
+  $ create-ceramic plugins [--core]
 
 FLAGS
   --core  Show core plugins.
@@ -117,18 +117,18 @@ DESCRIPTION
   List installed plugins.
 
 EXAMPLES
-  $ create-ceramic-app plugins
+  $ create-ceramic plugins
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.0.11/src/commands/plugins/index.ts)_
 
-## `create-ceramic-app plugins:install PLUGIN...`
+## `create-ceramic plugins:install PLUGIN...`
 
 Installs a plugin into the CLI.
 
 ```
 USAGE
-  $ create-ceramic-app plugins:install PLUGIN...
+  $ create-ceramic plugins:install PLUGIN...
 
 ARGUMENTS
   PLUGIN  Plugin to install.
@@ -150,23 +150,23 @@ DESCRIPTION
   the CLI without the need to patch and update the whole CLI.
 
 ALIASES
-  $ create-ceramic-app plugins add
+  $ create-ceramic plugins add
 
 EXAMPLES
-  $ create-ceramic-app plugins:install myplugin 
+  $ create-ceramic plugins:install myplugin 
 
-  $ create-ceramic-app plugins:install https://github.com/someuser/someplugin
+  $ create-ceramic plugins:install https://github.com/someuser/someplugin
 
-  $ create-ceramic-app plugins:install someuser/someplugin
+  $ create-ceramic plugins:install someuser/someplugin
 ```
 
-## `create-ceramic-app plugins:inspect PLUGIN...`
+## `create-ceramic plugins:inspect PLUGIN...`
 
 Displays installation properties of a plugin.
 
 ```
 USAGE
-  $ create-ceramic-app plugins:inspect PLUGIN...
+  $ create-ceramic plugins:inspect PLUGIN...
 
 ARGUMENTS
   PLUGIN  [default: .] Plugin to inspect.
@@ -179,16 +179,16 @@ DESCRIPTION
   Displays installation properties of a plugin.
 
 EXAMPLES
-  $ create-ceramic-app plugins:inspect myplugin
+  $ create-ceramic plugins:inspect myplugin
 ```
 
-## `create-ceramic-app plugins:install PLUGIN...`
+## `create-ceramic plugins:install PLUGIN...`
 
 Installs a plugin into the CLI.
 
 ```
 USAGE
-  $ create-ceramic-app plugins:install PLUGIN...
+  $ create-ceramic plugins:install PLUGIN...
 
 ARGUMENTS
   PLUGIN  Plugin to install.
@@ -210,23 +210,23 @@ DESCRIPTION
   the CLI without the need to patch and update the whole CLI.
 
 ALIASES
-  $ create-ceramic-app plugins add
+  $ create-ceramic plugins add
 
 EXAMPLES
-  $ create-ceramic-app plugins:install myplugin 
+  $ create-ceramic plugins:install myplugin 
 
-  $ create-ceramic-app plugins:install https://github.com/someuser/someplugin
+  $ create-ceramic plugins:install https://github.com/someuser/someplugin
 
-  $ create-ceramic-app plugins:install someuser/someplugin
+  $ create-ceramic plugins:install someuser/someplugin
 ```
 
-## `create-ceramic-app plugins:link PLUGIN`
+## `create-ceramic plugins:link PLUGIN`
 
 Links a plugin into the CLI for development.
 
 ```
 USAGE
-  $ create-ceramic-app plugins:link PLUGIN
+  $ create-ceramic plugins:link PLUGIN
 
 ARGUMENTS
   PATH  [default: .] path to plugin
@@ -244,16 +244,16 @@ DESCRIPTION
   command will override the user-installed or core plugin implementation. This is useful for development work.
 
 EXAMPLES
-  $ create-ceramic-app plugins:link myplugin
+  $ create-ceramic plugins:link myplugin
 ```
 
-## `create-ceramic-app plugins:uninstall PLUGIN...`
+## `create-ceramic plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ create-ceramic-app plugins:uninstall PLUGIN...
+  $ create-ceramic plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -266,17 +266,17 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ create-ceramic-app plugins unlink
-  $ create-ceramic-app plugins remove
+  $ create-ceramic plugins unlink
+  $ create-ceramic plugins remove
 ```
 
-## `create-ceramic-app plugins:uninstall PLUGIN...`
+## `create-ceramic plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ create-ceramic-app plugins:uninstall PLUGIN...
+  $ create-ceramic plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -289,17 +289,17 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ create-ceramic-app plugins unlink
-  $ create-ceramic-app plugins remove
+  $ create-ceramic plugins unlink
+  $ create-ceramic plugins remove
 ```
 
-## `create-ceramic-app plugins:uninstall PLUGIN...`
+## `create-ceramic plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ create-ceramic-app plugins:uninstall PLUGIN...
+  $ create-ceramic plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -312,17 +312,17 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ create-ceramic-app plugins unlink
-  $ create-ceramic-app plugins remove
+  $ create-ceramic plugins unlink
+  $ create-ceramic plugins remove
 ```
 
-## `create-ceramic-app plugins update`
+## `create-ceramic plugins update`
 
 Update installed plugins.
 
 ```
 USAGE
-  $ create-ceramic-app plugins update [-h] [-v]
+  $ create-ceramic plugins update [-h] [-v]
 
 FLAGS
   -h, --help     Show CLI help.

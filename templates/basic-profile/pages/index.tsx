@@ -1,9 +1,41 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { useState, useEffect } from 'react'
+import type { BasicProfile } from "@datamodels/identity-profile-basic";
+
+import ceramicLogo from '../public/ceramic.png'
+import { useCeramicContext, datastore } from '../context'
+import { authenticateCeramic } from '../utils'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
+  const ceramic = useCeramicContext() // access our Ceramic instance from `../context/index.tsx
+  const [profile, setProfile] = useState<BasicProfile | undefined>()
+
+  const handleLogin = async () => {
+    await authenticateCeramic(ceramic)
+    await getProfile()
+  }
+
+  const getProfile = async () => {
+    if(ceramic.did !== undefined) {
+      const profile = await datastore.get('basicProfile')
+      setProfile(profile)
+    }
+  }
+  
+  /**
+   * On load check if there is a DID-Session in local storage.
+   * If there is a DID-Session we can immediately authenticate the user.
+   * For more details on how we do this check the 'authenticateCeramic function in`../utils`.
+   */
+  useEffect(() => {
+    if(localStorage.getItem('did')) {
+      handleLogin()
+    }
+  }, [ ])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,60 +45,95 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
+        <h1 className={styles.title}>Your Decentralized Profile</h1>
+        <Image
+          src={ceramicLogo}
+          width="100"
+          height="100"
+          className={styles.logo}
+        />
+        {profile === undefined ? (
+          <button
+            onClick={() => {
+              handleLogin();
+            }}
           >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
+            Login
+          </button>
+        ) : (
+          <div className={styles.form}>
+            <div className={styles.formGroup}>
+              <label>Name</label>
+              <input
+                type="text"
+                defaultValue={profile.name}
+                onChange={(e) => {
+                  setProfile({ ...profile, name: e.target.value });
+                }}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Description</label>
+              <input
+                type="text"
+                defaultValue={profile.description}
+                onChange={(e) => {
+                  setProfile({ ...profile, description: e.target.value });
+                }}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Gender</label>
+              <input
+                type="text"
+                defaultValue={profile.gender}
+                onChange={(e) => {
+                  setProfile({ ...profile, gender: e.target.value });
+                }}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Emoji</label>
+              <input
+                type="text"
+                defaultValue={profile.emoji}
+                onChange={(e) => {
+                  setProfile({ ...profile, emoji: e.target.value });
+                }}
+                maxLength={2}
+              />
+            </div>
+            <div className={styles.buttonContainer}>
+              <button
+                onClick={() => {
+                  datastore.merge("basicProfile", {
+                    name: profile.name,
+                    description: profile.description,
+                    gender: profile.gender,
+                    emoji: profile.emoji,
+                  });
+                }}
+              >
+                Update Profile
+              </button>
+            </div>
+          </div>
+        )}
+      </main>
+      <footer className={styles.footer}>
+        <div>
+          <a href="https://developers.ceramic.network" target="_blank">
+            Learn about Ceramic
           </a>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
+        <div>
+          <a href="https://forum.ceramic.network" target="_blank">
+            Ask Questions
+          </a>
+        </div>
       </footer>
     </div>
-  )
+  );
 }
 
 export default Home
