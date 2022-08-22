@@ -1,15 +1,15 @@
 {
-  "name": "create-ceramic",
+  "name": "cli",
   "version": "0.0.0",
-  "description": "oclif example Hello World CLI",
-  "author": "3Box Labs",
+  "description": "Create an application using Ceramic.",
+  "author": "Ceramic Network",
   "bin": {
-    "create-ceramic": "./bin/run"
+    "create-ceramic-app": "./bin/run"
   },
-  "homepage": "https://github.com/Sterahi/hello-world",
+  "homepage": "https://github.com/ceramicstudio/hello-world",
   "license": "MIT",
   "main": "dist/index.js",
-  "repository": "Sterahi/hello-world",
+  "repository": "ceramicstudio/hello-world",
   "files": [
     "/bin",
     "/dist",
@@ -17,18 +17,13 @@
     "/oclif.manifest.json"
   ],
   "dependencies": {
-    "@oclif/core": "^1",
+    "@oclif/core": "^1.13.10",
     "@oclif/plugin-help": "^5",
-    "@oclif/plugin-plugins": "^2.0.1",
-    "axios": "^0.27.2",
-    "chalk": "^5.0.1",
-    "degit": "^2.8.4",
-    "ora": "^6.1.2"
+    "@oclif/plugin-plugins": "^2.0.1"
   },
   "devDependencies": {
     "@oclif/test": "^2",
     "@types/chai": "^4",
-    "@types/degit": "^2.8.3",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.9.4",
     "chai": "^4",
@@ -44,8 +39,8 @@
     "typescript": "^4.4.3"
   },
   "oclif": {
-    "bin": "create-ceramic",
-    "dirname": "create-ceramic",
+    "bin": "create-ceramic-app",
+    "dirname": "create-ceramic-app",
     "commands": "./dist/commands",
     "plugins": [
       "@oclif/plugin-help",
@@ -70,7 +65,7 @@
   "engines": {
     "node": ">=12.0.0"
   },
-  "bugs": "https://github.com/Sterahi/hello-world/issues",
+  "bugs": "https://github.com/ceramicstudio/hello-world/issues",
   "keywords": [
     "oclif"
   ],
