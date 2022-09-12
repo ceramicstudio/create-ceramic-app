@@ -8,21 +8,21 @@ export default class Clone extends Command {
     try {
       // FUTURE: Allow users to provide their own URL to clone from. If no full url is provided (including a .com/ca/xyz etc) assume it's one of
         // our defaults & use the appropriate URL.
-
       const emitter = degit(
-        "https://github.com/vercel/next.js/tree/canary/examples/", // TODO: Update to pull from our repo not Nexts
+        "https://github.com/ceramicstudio/create-ceramic-app/tree/main/templates/basic-profile",
         {
           cache: false,
           force: true,
-          verbose: true,
         }
       );
-      //@ts-ignore
+      
       emitter.on('info', info => {
+        if(info.code === 'SUCCESS') {
+          console.info(`Project cloned successfully at ${info.dest}`);
+        }
         console.info(info)
       })
-      // TODO: install in current directory, not home root.
-      await emitter.clone('~/')
+      await emitter.clone(process.cwd())
     } catch (e) {
       console.error(e)
     }
