@@ -1,17 +1,17 @@
 import axios from 'axios'
 import chalk from 'chalk'
 
-import {Command as CoreCommand} from '@oclif/core'
+import { Command as CoreCommand } from '@oclif/core'
 import { exec } from 'child_process'
 
-// import ora from 'ora'
-// import type { Ora } from 'ora'
+import ora from 'ora'
+import type { Ora } from 'ora'
 
 export abstract class Command extends CoreCommand {
-  // spinner!: Ora
+  spinner!: Ora
   
   async init(): Promise<void> {
-    // this.spinner = ora();
+    this.spinner = ora();
     await this.ceramicVersion()
   }
 
@@ -46,7 +46,7 @@ export abstract class Command extends CoreCommand {
         const installed = stdout.split("@ceramicnetwork/cli@")[1].trim();
 
         try {
-          if (installed != current || installed != next) {
+          if (installed != current && installed != next) {
             console.log(
               chalk.red(
                 "Your Ceramic CLI is out of date, if you do not upgrade features may not function as intended."
@@ -55,7 +55,7 @@ export abstract class Command extends CoreCommand {
             console.log(
               `Installed: ${
                 stdout.split("@ceramicnetwork/cli@")[1]
-              }\nTarget: ${chalk.bold.red(current)}`
+              }\n Target: ${chalk.bold.red(current)}`
             );
             // TODO: user feedback here.
             // console.log("Update now?");

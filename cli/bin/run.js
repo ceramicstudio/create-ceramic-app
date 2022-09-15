@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
-const oclif = require('@oclif/core')
+import { flush, run, Errors } from "@oclif/core";
 
-oclif.run().then(require('@oclif/core/flush')).catch(require('@oclif/core/handle'))
+run(void 0, import.meta.url)
+  .then(flush)
+  .catch(Errors.handle);
