@@ -1,0 +1,1144 @@
+{
+    "botamon": {
+        "evolutions": [
+            {
+                "name": "koromon",
+                "stats": {
+                    "offense": 2,
+                    "defense": 2,
+                    "speed": 2,
+                    "brains": 2
+                }
+            }
+        ]
+    },
+    "pitchmon": {
+        "evolutions": [
+            {
+                "name": "Pukamon",
+                "stats": {
+                    "offense": 2,
+                    "defense": 2,
+                    "speed": 2,
+                    "brains": 2
+                }
+            }
+        ]
+    },
+    "koromon": {
+        "evolutions": [
+            {
+                "name": "Agumon",
+                "stats": {
+                    "offense": 5,
+                    "defense": 5
+                }
+            }, {
+                "name": "Betamon",
+                "stats": {
+                    "speed": 5,
+                    "brains": 5
+                }
+            }
+        ]
+    },
+    "pukamon": {
+        "evolutions": [
+            {
+                "name": "Coronamon",
+                "stats": {
+                    "offense": 5,
+                    "defense": 5
+                }
+            }, {
+                "name": "Lunamon",
+                "stats": {
+                    "speed": 5,
+                    "brains": 5
+                }
+            }
+        ]
+    },
+    "coronamon": {
+        "evolutions": [
+            {
+                "name": "firamon",
+                "stats": {
+                    "offense": 10
+                }
+            }
+        ]
+    },
+    "firamon": {
+        "evolutions": [
+            {
+                "name": "Flaremon",
+                "stats": {
+                    "offense": 15
+                }
+            }
+        ]
+    },
+    "flaremon": {
+        "evolutions": [
+            {
+                "name": "Apollomon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    },
+    "apollomon": {
+        "evolutions":[]
+    },
+    "lunamon": {
+        "evolutions": [
+            {
+                "name": "Lekismon",
+                "stats": {
+                    "offense": 10
+                }
+            }
+        ]
+    },
+    "lekismon":{
+        "evolutions": [
+            {
+                "name": "Crescemon",
+                "stats": {
+                    "offense": 15
+                } 
+            }
+        ]
+    },
+    "crescemon": {
+        "evolutions": [
+            {
+                "name": "Dianamon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    },
+    "dianamon": {
+        "evolutions":[]
+    },
+    "agumon": {
+        "evolutions": [
+            {
+                "name": "Greymon", 
+                "stats": {
+                    "offense": 20
+                }
+            }, {
+                "name": "Tyranomon", 
+                "stats": {
+                    "defense": 20
+                }
+            },{
+                "name": "Devimon", 
+                "stats": {
+                    "speed": 20
+                }
+            },{
+                "name": "Meramon", 
+                "stats": {
+                    "brains": 20
+                }
+            },{
+                "name": "Numemon", 
+                "stats": {}
+            }
+        ] 
+    }, 
+    "betamon": {
+        "evolutions": [
+            {
+                "name": "Devimon", 
+                "stats": {
+                    "speed":20
+                }
+            },{
+                "name": "Meramon", 
+                "stats": {
+                    "brains":20
+                }
+            },{
+                "name": "Airdramon", 
+                "stats": {
+                    "defense": 20
+                }
+            },{
+                "name": "Seadramon", 
+                "stats": {
+                    "offense": 20
+                }
+            },{
+                "name": "Numemon", 
+                "stats": {}
+            }
+        ]
+    },
+    "greymon": {
+        "evolutions": [
+            {
+                "name": "Metalgreymon",
+                "stats": {
+                    "offense": 40
+                }
+            }
+        ]
+    },
+    "devimon": {
+        "evolutions": [
+            {
+                "name": "Metalgreymon",
+                "stats": {
+                    "offense": 40
+                }
+            }
+        ]
+    },
+    "airdramon": {
+        "evolutions": [
+            {
+                "name": "Metalgreymon",
+                "stats": {
+                    "offense": 40
+                }
+            }
+        ]
+    },
+    "numemon": {
+        "evolutions": [
+            {
+                "name": "Monzaemon",
+                "stats": {
+                    "offense": 40
+                }
+            }
+        ]
+    },
+    "tyranomon": {
+        "evolutions": [
+            {
+                "name": "Mamemon",
+                "stats": {
+                    "offense": 40
+                }
+            }
+        ]
+    },
+    "meramon": {
+        "evolutions": [
+            {
+                "name": "Mamemon",
+                "stats": {
+                    "offense": 40
+                }
+            }
+        ]
+    },
+    "seadramon": {
+        "evolutions": [
+            {
+                "name": "Mamemon",
+                "stats": {
+                    "offense": 40
+                }
+            }
+        ]
+    },
+    "metalgreymon": {
+        "evolutions": [
+            {
+                "name": "Blitzgreymon",
+                "stats": {
+                    "offense": 60
+                }
+            }
+        ]
+    },
+    "mamemon": {
+        "evolutions": [
+            {
+                "name": "Banchomamemon",
+                "stats": {
+                    "offense": 60
+                }
+            }
+        ]
+    },
+    "blitzgreymon": {
+        "evolutions":[]
+    },
+    "banchomamemon": {
+        "evolutions":[]
+    },
+    "punimon": {
+        "evolutions": [
+            {
+                "name": "Tsunomon",
+                "stats": {
+                    "offense": 2
+                }
+            }
+        ]
+    }, 
+    "tsunomon": {
+        "evolutions": [
+            {
+                "name": "Gabumon",
+                "stats": {
+                    "offense": 5,
+                    "defense": 5
+                }
+            }, {
+                "name": "Elecmon",
+                "stats": {
+                    "speed": 5,
+                    "brains": 5
+                }
+            }
+        ]
+    }, 
+    "gabumon": {
+        "evolutions": [
+            {
+                "name": "Kabuterimon",
+                "stats": {
+                    "offense": 10
+                }
+            },{
+                "name": "Garurumon",
+                "stats": {
+                    "defense": 10
+                }
+            },{
+                "name": "Angemon",
+                "stats": {
+                    "speed": 10
+                }
+            },{
+                "name": "Fridgimon",
+                "stats": {
+                    "brains": 10
+                }
+            },{
+                "name": "Vegimon",
+                "stats": {}
+            }
+        ]
+    }, 
+    "elecmon": {
+        "evolutions": [
+            {
+                "name": "Angemon",
+                "stats": {
+                    "speed": 10
+                }
+            }, {
+                "name": "Fridgimon",
+                "stats": {
+                    "brains": 10
+                }
+            }, {
+                "name": "Birdramon",
+                "stats": {
+                    "offense": 10
+                }
+            }, {
+                "name": "Whamon",
+                "stats": {
+                    "defense": 10
+                }
+            }
+        ]
+    },
+    "angemon": {
+        "evolutions": [
+            {
+                "name": "skullgreymon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    }, 
+    "kabuterimon": {
+        "evolutions": [
+            {
+                "name": "skullgreymon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    }, 
+    "birdramon": {
+        "evolutions": [
+            {
+                "name": "skullgreymon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    },
+    "garurumon": {
+        "evolutions": [
+            {
+                "name": "metalmamemon",
+                "stats": {
+                    "offense": 30
+                }
+            }
+        ]
+    }, 
+    "fridgimon": {
+        "evolutions": [
+            {
+                "name": "metalmamemon",
+                "stats": {
+                    "offense": 30
+                }
+            }
+        ]
+    }, 
+    "whamon": {
+        "evolutions": [
+            {
+                "name": "metalmamemon",
+                "stats": {
+                    "offense": 30
+                }
+            }
+        ]
+    }, 
+    "vegimon": {
+        "evolutions": [
+            {
+                "name": "Vademon",
+                "stats": {
+                    "offense": 30
+                }
+            }
+        ]
+    }, 
+    "metalmamemon": {
+        "evolutions": [
+            {
+                "name": "Cresgarurumon",
+                "stats": {
+                    "offense": 40
+                }
+            }
+        ]
+    },
+    "skullgreymon": {
+        "evolutions": [
+            {
+                "name": "Skullmammon",
+                "stats": {
+                    "offense": 40
+                }
+            }
+        ]
+    },
+    "skullmammon": {
+        "evolutions":[]
+    },
+    "cresgarurumon": {
+        "evolutions":[]
+    },
+    "poyomon": {
+        "evolutions": [
+            {
+                "name": "Tokomon",
+                "stats": {  
+                    "offense": 2,
+                    "defense": 2,
+                    "brains": 2,
+                    "speed": 2
+                }
+            }
+        ]
+    },
+    "tokomon": {
+        "evolutions": [
+            {
+                "name": "Patamon",
+                "stats": {
+                    "offense": 5,
+                    "defense": 5
+                }
+            }, {
+                "name": "Kunemon",
+                "stats": {
+                    "speed": 5,
+                    "brains": 5
+                }
+            }
+        ]
+    },
+    "patamon": {
+        "evolutions": [
+            {
+                "name": "Unimon",
+                "stats": {
+                    "defense": 10
+                }
+            }, {
+                "name": "Centarumon",
+                "stats": {
+                    "brains": 10
+                }
+            },  {
+                "name": "Ogremon",
+                "stats": {
+                    "offense": 10
+                }
+            },  {
+                "name": "Bakemon",
+                "stats": {
+                    "speed": 10
+                }
+            }, {
+                "name": "Sukamon",
+                "stats": {}
+            }
+        ]
+    },
+    "kunemon": {
+        "evolutions": [
+            {
+                "name": "Shellmon",
+                "stats": {
+                    "defense": 10
+                }
+            }, {
+                "name": "Drimogemon",
+                "stats": {
+                    "brains": 10
+                }
+            },  {
+                "name": "Ogremon",
+                "stats": {
+                    "offense": 10
+                }
+            },  {
+                "name": "Bakemon",
+                "stats": {
+                    "speed": 10
+                }
+            }, {
+                "name": "Sukamon",
+                "stats": {}
+            }
+        ]
+    },
+    "ogremon": {
+        "evolutions": [
+            {
+                "name": "Andromon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    },
+    "unimon": {
+        "evolutions": [
+            {
+                "name": "Andromon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    },
+    "shellmon": {
+        "evolutions": [
+            {
+                "name": "Andromon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    },
+    "centarumon": {
+        "evolutions": [
+            {
+                "name": "Giromon",
+                "stats": {
+                    "offense": 40
+                }
+            }
+        ]
+    }, 
+    "bakemon": {
+        "evolutions": [
+            {
+                "name": "Giromon",
+                "stats": {
+                    "offense": 40
+                }
+            }
+        ]
+    }, 
+    "drimogemon": {
+        "evolutions": [
+            {
+                "name": "Giromon",
+                "stats": {
+                    "offense": 40
+                }
+            }
+        ]
+    },
+    "andromon": {
+        "evolutions": [
+            {
+                "name": "Hiandromon",
+                "stats": {
+                    "offense": 50
+                }
+            }
+        ]
+    }, 
+    "yuramon": {
+        "evolutions": [
+            {
+                "name": "tanemon",
+                "stats": {
+                    "offense": 2,
+                    "defense": 2,
+                    "speed": 2,
+                    "brains": 2
+                }
+            }
+        ]
+    },
+    "tanemon": {
+        "evolutions": [
+            {
+                "name": "Biyomon",
+                "stats": {
+                    "offense": 5,
+                    "defense": 5
+                }
+            }, {
+                "name": "Palmon",
+                "stats": {
+                    "speed": 5,
+                    "brains": 5
+                }
+            }
+        ]
+    },
+    "biyomon": {
+        "evolutions": [
+            {
+                "name": "Monochromon",
+                "stats": {
+                    "brains": 10
+                }
+            },{
+                "name": "Kokatorimon",
+                "stats": {
+                    "speed": 10
+                }
+            },{
+                "name": "Leomon",
+                "stats": {
+                    "offense": 10
+                }
+            },{
+                "name": "Kuwagamon",
+                "stats": {
+                    "defense": 10
+                }
+            },{
+                "name": "Nanimon",
+                "stats": {}
+            }
+        ]
+    }, 
+    "palmon": {
+        "evolutions": [
+            {
+                "name": "Mojyamon",
+                "stats": {
+                    "brains": 10
+                }
+            },{
+                "name": "Coelamon",
+                "stats": {
+                    "speed": 10
+                }
+            },{
+                "name": "Leomon",
+                "stats": {
+                    "offense": 10
+                }
+            },{
+                "name": "Kuwagamon",
+                "stats": {
+                    "defense": 10
+                }
+            },{
+                "name": "Nanimon",
+                "stats": {}
+            }
+        ]
+    },
+    "leomon": {
+        "evolutions": [
+            {
+                "name": "Megadramon",
+                "stats": {
+                    "offense": 30
+                }
+            }
+        ]
+    },
+    "monochromon": {
+        "evolutions": [
+            {
+                "name": "Megadramon",
+                "stats": {
+                    "offense": 30
+                }
+            }
+        ]
+    },
+    "coelamon": {
+        "evolutions": [
+            {
+                "name": "Megadramon",
+                "stats": {
+                    "offense": 30
+                }
+            }
+        ]
+    },
+    "kockatorimon": {
+        "evolutions": [
+            {
+                "name": "piximon",
+                "stats": {
+                    "offense": 30
+                }
+            }
+        ]
+    },
+    "kuwagamon": {
+        "evolutions": [
+            {
+                "name": "piximon",
+                "stats": {
+                    "offense": 30
+                }
+            }
+        ]
+    },
+    "mojyamon": {
+        "evolutions": [
+            {
+                "name": "piximon",
+                "stats": {
+                    "offense": 30
+                }
+            }
+        ]
+    },
+    "piximon": {
+        "evolutions": []
+    },
+    "megadramon": {
+        "evolutions": [
+            {
+                "name": "Aegisdramon",
+                "stats": {
+                    "offense": 40
+                }
+            }
+        ]
+    },
+    "zurumon": {
+        "evolutions": [
+            {
+                "name": "Pagumon",
+                "stats": {
+                    "offense": 2,
+                    "defense": 2,
+                    "speed": 2,
+                    "brains": 2
+                }
+            }
+        ]
+    },
+    "pagumon": {
+        "evolutions": [
+            {
+                "name": "Gazimon",
+                "stats": {
+                    "offense": 5,
+                    "defense": 5
+                }
+            }, {
+                "name": "Gizamon",
+                "stats": {
+                    "speed": 5,
+                    "brains": 5
+                }
+            }
+        ]
+    },
+    "gazimon": {
+        "evolutions": [
+            {
+                "name": "DarkTyranomon",
+                "stats": {
+                    "offense": 10
+                }
+            }, {
+                "name": "Cyclomon",
+                "stats": {
+                    "defense": 10
+                }
+            }, {
+                "name": "Devidramon",
+                "stats": {
+                    "speed": 10
+                }
+            }, {
+                "name": "Tuskmon",
+                "stats": {
+                    "brains": 10
+                }
+            }, {
+                "name": "Raremon",
+                "stats": {}
+            }
+        ]
+    },
+    "gizamon": {
+        "evolutions": [
+            {
+                "name": "Deltamon",
+                "stats": {
+                    "offense": 10
+                }
+            }, {
+                "name": "Flymon",
+                "stats": {
+                    "defense": 10
+                }
+            }, {
+                "name": "Devidramon",
+                "stats": {
+                    "speed": 10
+                }
+            }, {
+                "name": "Tuskmon",
+                "stats": {
+                    "brains": 10
+                }
+            }, {
+                "name": "Raremon",
+                "stats": {}
+            }
+        ]
+    },
+    "darktyranomon": {
+        "evolutions": [
+            {
+                "name": "MetalTyranomon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    },
+    "devidramon": {
+        "evolutions": [
+            {
+                "name": "MetalTyranomon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    },
+    "flymon": {
+        "evolutions": [
+            {
+                "name": "MetalTyranomon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    },
+    "cyclomon": {
+        "evolutions": [
+            {
+                "name": "datamon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    },
+    "tuskmon": {
+        "evolutions": [
+            {
+                "name": "datamon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    },
+    "deltamon": {
+        "evolutions": [
+            {
+                "name": "datamon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    },
+    "datamon": {
+        "evolutions": []
+    },
+    "metaltyranomon": {
+        "evolutions": [
+            {
+                "name": "Machinedramon",
+                "stats": {
+                    "offense": 40
+                }
+            }
+        ]
+    },
+    "machinedramon": {
+        "evolutions":[]
+    },
+    "petitmon": {
+        "evolutions": [
+            {
+                "name": "Babydmon",
+                "stats": {
+                    "offense": 2,
+                    "defense": 2,
+                    "speed": 2,
+                    "brains": 2
+                }
+            }
+        ]
+    },
+    "babydmon": {
+        "evolutions": [
+            {
+                "name": "Dracomon",
+                "stats":{
+                    "offense":5,
+                    "defense": 5,
+                    "speed": 5,
+                    "brains": 5
+                }
+            }
+        ]
+    }, 
+    "dracomon": {
+        "evolutions": [
+            {
+                "name": "coredramon_blue",
+                "stats": {
+                    "offense": 10,
+                    "defense": 10
+                }
+            }, {
+                "name": "coredramon",
+                "stats": {
+                    "speed": 10,
+                    "brains": 10
+                }
+            }
+        ]
+    },
+    "coredramon_blue": {
+        "evolutions": [
+            {
+                "name": "wingdramon",
+                "stats": {
+                    "offense": 15
+                }
+            }
+        ]
+    },
+    "coredramon": {
+        "evolutions": [
+            {
+                "name": "groundramon",
+                "stats": {
+                    "offense":15
+                }
+            }
+        ]
+    },
+    "groundramon": {
+        "evolutions": [
+            {
+                "name": "breakdramon",
+                "stats": {
+                    "offense":20
+                }
+            },{
+                "name": "metalgarurumon",
+                "stats": {
+                    "defense":20
+                }
+            }
+        ]
+    },
+    "breakdramon": {
+        "evolutions":[]
+    },
+    "metalgarurumon": {
+        "evolutions":[]
+    },
+    "wingdramon": {
+        "evolutions": [
+            {
+                "name": "slayerdramon",
+                "stats": {
+                    "offense":20
+                }
+            }, {
+                "name": "wargreymon",
+                "stats": {
+                    "defense": 20
+                }
+            }
+        ]
+    },
+    "slayerdramon": {
+        "evolutions":[]
+    },
+    "wargreymon": {
+        "evolutions":[]
+    },
+    "dodomon": {
+        "evolutions": [
+            {
+                "name": "Dorimon",
+                "stats": {
+                    "offense": 2
+                }
+            }
+        ]
+    },
+    "dorimon": {
+        "evolutions": [
+            {
+                "name":"Dorumon",
+                "stats": {
+                    "offense": 5
+                }
+            }
+        ]
+    },
+    "dorumon": {
+        "evolutions": [
+            {
+                "name":"Dorugamon",
+                "stats": {
+                    "offense": 10
+                }
+            }
+        ]
+    },
+    "dorugamon": {
+        "evolutions": [
+            {
+                "name": "doruguremon",
+                "stats": {
+                    "offense": 15
+                }
+            }
+        ]
+    },
+    "doruguremon": {
+        "evolutions": [
+            {
+                "name": "Alphamon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    },
+    "alphamon": {
+        "evolutions":[]
+    },
+    "yukimibotamon": {
+        "evolutions": [
+            {
+                "name": "Nyaromon",
+                "stats": {
+                    "offense": 2
+                }
+            }
+        ]
+    },
+    "nyaromon": {
+        "evolutions": [
+            {
+                "name": "Plotmon",
+                "stats": {
+                    "offense": 5
+                }
+            }
+        ]
+    },
+    "plotmon": {
+        "evolutions": [
+            {
+                "name": "Meicoomon",
+                "stats": {
+                    "offense": 10
+                }
+            }
+        ]
+    },
+    "meicoomon": {
+        "evolutions": [
+            {
+                "name": "Meicrackmon",
+                "stats": {
+                    "offense": 15
+                }
+            }
+        ]
+    },
+    "meicrackmon": {
+        "evolutions": [
+            {
+                "name": "Rasielmon",
+                "stats": {
+                    "offense": 20
+                }
+            }
+        ]
+    },
+    "rasielmon": {
+        "evolutions": []
+    }
+}

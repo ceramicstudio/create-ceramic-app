@@ -9,9 +9,11 @@ import type { Ora } from 'ora'
 
 export abstract class Command extends CoreCommand {
   spinner!: Ora
+  chalk!: chalk
   
   async init(): Promise<void> {
     this.spinner = ora();
+    this.chalk = chalk
     await this.ceramicVersion()
   }
 

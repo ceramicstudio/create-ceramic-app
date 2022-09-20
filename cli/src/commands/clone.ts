@@ -27,7 +27,8 @@ export default class Clone extends Command {
           }
         }
       ])
-      console.log(answers)
+
+      this.spinner.start("cloning...");
 
       // FUTURE: Allow users to provide their own URL to clone from. If no full url is provided (including a .com/ca/xyz etc) assume it's one of
         // our defaults & use the appropriate URL.
@@ -42,12 +43,13 @@ export default class Clone extends Command {
       
       emitter.on('info', info => {
         if(info.code === 'SUCCESS') {
-          console.info(`Project cloned successfully at ${info.dest}`);
+          this.spinner.succeed(`Project cloned successfully at ${this.chalk.green.bold(info.dest)}`);
         }
       })
       await emitter.clone(`${process.cwd()}/${answers.destination}`)
       // await emitter.clone(process.cwd().toString());
     } catch (e) {
+      this.spinner.fail((e as Error).message);
       console.error(e)
     }
   }

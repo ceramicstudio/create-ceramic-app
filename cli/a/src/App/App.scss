@@ -1,0 +1,23 @@
+.App {
+  // display: flex;
+  width: 105vw;
+  height: 105vh;
+  margin: 0 auto;
+  margin-left: -5px;
+  overflow: hidden;
+
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  flex-direction: row;
+  @media screen and (max-width: 630px) {
+    align-items: flex-start;
+  }
+  h1 {
+    width: 80%;
+    text-align: center;
+    text-shadow: 0px 0px 4px white;
+    font-family: sans-serif;
+    margin: 0;
+  }
+}
