@@ -33,8 +33,7 @@ export default class Clone extends Command {
       // FUTURE: Allow users to provide their own URL to clone from. If no full url is provided (including a .com/ca/xyz etc) assume it's one of
         // our defaults & use the appropriate URL.
       const emitter = degit(
-        // "https://github.com/ceramicstudio/create-ceramic-app/tree/main/templates/basic-profile",
-        "https://github.com/Sterahi/d-vyce",
+        "https://github.com/ceramicstudio/create-ceramic-app/tree/main/templates/basic-profile",
         {
           cache: false,
           force: false,
