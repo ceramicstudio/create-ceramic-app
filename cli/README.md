@@ -1,334 +1,44 @@
-oclif-hello-world
-=================
-
-oclif example Hello World CLI
-
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/oclif-hello-world.svg)](https://npmjs.org/package/oclif-hello-world)
-[![CircleCI](https://circleci.com/gh/oclif/hello-world/tree/main.svg?style=shield)](https://circleci.com/gh/oclif/hello-world/tree/main)
-[![Downloads/week](https://img.shields.io/npm/dw/oclif-hello-world.svg)](https://npmjs.org/package/oclif-hello-world)
-[![License](https://img.shields.io/npm/l/oclif-hello-world.svg)](https://github.com/oclif/hello-world/blob/main/package.json)
-
-<!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
-<!-- tocstop -->
-# Usage
-<!-- usage -->
-```sh-session
-$ npm install -g cli
-$ create-ceramic-app COMMAND
-running command...
-$ create-ceramic-app (--version)
-cli/0.0.0 darwin-arm64 node-v16.4.2
-$ create-ceramic-app --help [COMMAND]
-USAGE
-  $ create-ceramic-app COMMAND
-...
-```
-<!-- usagestop -->
-# Commands
-<!-- commands -->
-* [`create-ceramic-app hello PERSON`](#create-ceramic-app-hello-person)
-* [`create-ceramic-app hello world`](#create-ceramic-app-hello-world)
-* [`create-ceramic-app help [COMMAND]`](#create-ceramic-app-help-command)
-* [`create-ceramic-app plugins`](#create-ceramic-app-plugins)
-* [`create-ceramic-app plugins:install PLUGIN...`](#create-ceramic-app-pluginsinstall-plugin)
-* [`create-ceramic-app plugins:inspect PLUGIN...`](#create-ceramic-app-pluginsinspect-plugin)
-* [`create-ceramic-app plugins:install PLUGIN...`](#create-ceramic-app-pluginsinstall-plugin-1)
-* [`create-ceramic-app plugins:link PLUGIN`](#create-ceramic-app-pluginslink-plugin)
-* [`create-ceramic-app plugins:uninstall PLUGIN...`](#create-ceramic-app-pluginsuninstall-plugin)
-* [`create-ceramic-app plugins:uninstall PLUGIN...`](#create-ceramic-app-pluginsuninstall-plugin-1)
-* [`create-ceramic-app plugins:uninstall PLUGIN...`](#create-ceramic-app-pluginsuninstall-plugin-2)
-* [`create-ceramic-app plugins update`](#create-ceramic-app-plugins-update)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## `create-ceramic-app hello PERSON`
+## Available Scripts
 
-Say hello
+In the project directory, you can run:
 
-```
-USAGE
-  $ create-ceramic-app hello [PERSON] -f <value>
+### `yarn start`
 
-ARGUMENTS
-  PERSON  Person to say hello to
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-FLAGS
-  -f, --from=<value>  (required) Whom is saying hello
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-DESCRIPTION
-  Say hello
+### `yarn test`
 
-EXAMPLES
-  $ oex hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
-```
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-_See code: [dist/commands/hello/index.ts](https://github.com/ceramicstudio/hello-world/blob/v0.0.0/dist/commands/hello/index.ts)_
+### `yarn build`
 
-## `create-ceramic-app hello world`
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-Say hello world
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-```
-USAGE
-  $ create-ceramic-app hello world
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-DESCRIPTION
-  Say hello world
+### `yarn eject`
 
-EXAMPLES
-  $ oex hello world
-  hello world! (./src/commands/hello/world.ts)
-```
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-## `create-ceramic-app help [COMMAND]`
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Display help for create-ceramic-app.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-```
-USAGE
-  $ create-ceramic-app help [COMMAND] [-n]
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-ARGUMENTS
-  COMMAND  Command to show help for.
+## Learn More
 
-FLAGS
-  -n, --nested-commands  Include all nested commands in the output.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-DESCRIPTION
-  Display help for create-ceramic-app.
-```
-
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.10/src/commands/help.ts)_
-
-## `create-ceramic-app plugins`
-
-List installed plugins.
-
-```
-USAGE
-  $ create-ceramic-app plugins [--core]
-
-FLAGS
-  --core  Show core plugins.
-
-DESCRIPTION
-  List installed plugins.
-
-EXAMPLES
-  $ create-ceramic-app plugins
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.0.11/src/commands/plugins/index.ts)_
-
-## `create-ceramic-app plugins:install PLUGIN...`
-
-Installs a plugin into the CLI.
-
-```
-USAGE
-  $ create-ceramic-app plugins:install PLUGIN...
-
-ARGUMENTS
-  PLUGIN  Plugin to install.
-
-FLAGS
-  -f, --force    Run yarn install with force flag.
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Installs a plugin into the CLI.
-
-  Can be installed from npm or a git url.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
-  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
-  the CLI without the need to patch and update the whole CLI.
-
-ALIASES
-  $ create-ceramic-app plugins add
-
-EXAMPLES
-  $ create-ceramic-app plugins:install myplugin 
-
-  $ create-ceramic-app plugins:install https://github.com/someuser/someplugin
-
-  $ create-ceramic-app plugins:install someuser/someplugin
-```
-
-## `create-ceramic-app plugins:inspect PLUGIN...`
-
-Displays installation properties of a plugin.
-
-```
-USAGE
-  $ create-ceramic-app plugins:inspect PLUGIN...
-
-ARGUMENTS
-  PLUGIN  [default: .] Plugin to inspect.
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Displays installation properties of a plugin.
-
-EXAMPLES
-  $ create-ceramic-app plugins:inspect myplugin
-```
-
-## `create-ceramic-app plugins:install PLUGIN...`
-
-Installs a plugin into the CLI.
-
-```
-USAGE
-  $ create-ceramic-app plugins:install PLUGIN...
-
-ARGUMENTS
-  PLUGIN  Plugin to install.
-
-FLAGS
-  -f, --force    Run yarn install with force flag.
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Installs a plugin into the CLI.
-
-  Can be installed from npm or a git url.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
-  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
-  the CLI without the need to patch and update the whole CLI.
-
-ALIASES
-  $ create-ceramic-app plugins add
-
-EXAMPLES
-  $ create-ceramic-app plugins:install myplugin 
-
-  $ create-ceramic-app plugins:install https://github.com/someuser/someplugin
-
-  $ create-ceramic-app plugins:install someuser/someplugin
-```
-
-## `create-ceramic-app plugins:link PLUGIN`
-
-Links a plugin into the CLI for development.
-
-```
-USAGE
-  $ create-ceramic-app plugins:link PLUGIN
-
-ARGUMENTS
-  PATH  [default: .] path to plugin
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Links a plugin into the CLI for development.
-
-  Installation of a linked plugin will override a user-installed or core plugin.
-
-  e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
-  command will override the user-installed or core plugin implementation. This is useful for development work.
-
-EXAMPLES
-  $ create-ceramic-app plugins:link myplugin
-```
-
-## `create-ceramic-app plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ create-ceramic-app plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ create-ceramic-app plugins unlink
-  $ create-ceramic-app plugins remove
-```
-
-## `create-ceramic-app plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ create-ceramic-app plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ create-ceramic-app plugins unlink
-  $ create-ceramic-app plugins remove
-```
-
-## `create-ceramic-app plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ create-ceramic-app plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ create-ceramic-app plugins unlink
-  $ create-ceramic-app plugins remove
-```
-
-## `create-ceramic-app plugins update`
-
-Update installed plugins.
-
-```
-USAGE
-  $ create-ceramic-app plugins update [-h] [-v]
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Update installed plugins.
-```
-<!-- commandsstop -->
+To learn React, check out the [React documentation](https://reactjs.org/).
