@@ -1,79 +1,85 @@
-import axios from 'axios'
-import chalk from 'chalk'
+import ora from 'ora'
+import KeyDIDResolver from 'key-did-resolver'
 
 import { Command as CoreCommand } from '@oclif/core'
-import { exec } from 'child_process'
-
-import ora from 'ora'
 import type { Ora } from 'ora'
+import { randomBytes } from 'crypto';
+import { toString } from 'uint8arrays/to-string';
+import { writeFile } from 'fs';
+import { DID } from 'dids';
+import { Ed25519Provider } from 'key-did-provider-ed25519';
 
 export abstract class Command extends CoreCommand {
-  spinner!: Ora
-  chalk!: chalk
-  
+  spinner!: Ora;
+  searchTool!: string;
+
   async init(): Promise<void> {
     this.spinner = ora();
-    this.chalk = chalk
-    await this.ceramicVersion()
   }
 
-  async ceramicVersion(): Promise<void> {
-    const version = await axios.get(
-      "https://registry.npmjs.org/@ceramicnetwork/cli"
-    );
-    const current = version.data['dist-tags'].latest.trim();
-    const next = version.data["dist-tags"].next.trim();
-    
-    let searchTool = ''
-    if(process.platform === 'win32') {
-      searchTool = 'findstr'
-    } else if (process.platform === 'darwin' || process.platform === 'linux') {
-      searchTool = 'grep'
-    } else {
-      throw new Error(`create-ceramic-app does not support ${process.platform} at the moment.`);
-    }
+  generateAdminKeyDid = async (): Promise<{seed: string, did: DID}> => {
+    const seed = new Uint8Array(randomBytes(32))
+    const keyResolver = KeyDIDResolver.getResolver()
+    const did = new DID({
+      provider: new Ed25519Provider(seed),
+      resolver: { ...keyResolver },
+    });
 
-    exec(
-      `yarn global list && npm list -g --depth=0 | ${searchTool} @ceramicnetwork/cli`,
-      (err, stdout) => {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        if (!stdout.includes("@ceramicnetwork/cli")) {
-          console.log(
-            `${chalk.bold.red("Ceramic is not installed globally.")}`
-          );
-        }
-        const installed = stdout.split("@ceramicnetwork/cli@")[1].trim();
+    await did.authenticate()
+    return {seed:toString(seed, 'base16'), did}
+  };
 
-        try {
-          if (installed != current && installed != next) {
-            console.log(
-              chalk.red(
-                "Your Ceramic CLI is out of date, if you do not upgrade features may not function as intended."
-              )
-            );
-            console.log(
-              `Installed: ${
-                stdout.split("@ceramicnetwork/cli@")[1]
-              }\n Target: ${chalk.bold.red(current)}`
-            );
-            // TODO: user feedback here.
-            // console.log("Update now?");
-          } else if (installed == current || installed == next) {
-            // do nothing
-          }
-        } catch (err) {
-          console.error(err);
-        }
+  generateLocalConfig = async (adminSeed: string, adminDid:DID, directory: string) => {
+    this.spinner.info("Generating ComposeDB configuration file");
+    // TODO: update paths to be dynmaic based off of user not use mine.
+    const data =
+      {
+        anchor: {},
+        "http-api": {
+          "cors-allowed-origins": [".*"],
+          "admin-dids": [adminDid.id]
+        },
+        ipfs: {
+          mode: "bundled",
+        },
+        logger: {
+          "log-level": 2,
+          "log-to-files": false,
+        },
+        metrics: {
+          "metrics-exporter-enabled": false,
+          "metrics-port": 9090,
+        },
+        network: {
+          name: "testnet-clay",
+        },
+        node: {},
+        "state-store": {
+          mode: "fs",
+          "local-directory": `~/.ceramic/statestore/`,
+        },
+        indexing: {
+          db: "sqlite://~/.ceramic/indexing.sqlite",
+          "allow-queries-before-historical-sync": true,
+          models: [],
+        },
       }
-    );
-  }
-  async upgradeCeramic(): Promise<void> {
-    // TODO: upgrade global instance of Ceramic.
-  }
-  async installCeramic(): Promise<void> {
-    // TODO: install ceramic globally.
-  }
+      console.log('Config data: ', data)
+      writeFile(
+        `${process.cwd()}/${directory}/composedb.config.json`,
+        JSON.stringify(data),
+        (err) => {
+          if (err) {
+            console.error(err);
+          }
+          this.spinner.succeed("ComposeDB file generated successfully.");
+        }
+      );
+      writeFile(`${process.cwd()}/${directory}/admin_seed.txt`, adminSeed, (err) => {
+        if (err) {
+          console.error(err)
+
+        }
+      })
+  };
 }

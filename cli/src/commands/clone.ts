@@ -1,5 +1,6 @@
 import degit from "degit"
 import inquirer from 'inquirer'
+import chalk from 'chalk'
 
 import { Command } from "../command.js"
 
@@ -9,6 +10,15 @@ export default class Clone extends Command {
   static flags = Command.flags
 
   async run(): Promise<void> {
+    // TODO: Figure out a better way to do this.
+    const templates = {
+      "DID-DataStore":
+        "https://github.com/ceramicstudio/create-ceramic-app/tree/main/templates/basic-profile",
+        // TODO: update this link
+        "[DEVELOPER PREVIEW] ComposeDB":
+        "https://github.com/ceramicstudio/create-ceramic-app/tree/main/templates/basic-profile",
+    };
+    
     try {
       const answers = await inquirer.prompt([
         {
@@ -25,15 +35,22 @@ export default class Clone extends Command {
 
             return "Sorry, name can only contain URL-friendly characters.";
           }
+        }, {
+          type: 'list',
+          name: 'template',
+          message:'Choose your Template',
+          choices: [
+            'DID-DataStore',
+            '[DEVELOPER PREVIEW] ComposeDB'
+          ]
         }
       ])
 
       this.spinner.start("cloning...");
-
       // FUTURE: Allow users to provide their own URL to clone from. If no full url is provided (including a .com/ca/xyz etc) assume it's one of
         // our defaults & use the appropriate URL.
       const emitter = degit(
-        "https://github.com/ceramicstudio/create-ceramic-app/tree/main/templates/basic-profile",
+        templates[answers.template],
         {
           cache: false,
           force: false,
@@ -42,11 +59,18 @@ export default class Clone extends Command {
       
       emitter.on('info', info => {
         if(info.code === 'SUCCESS') {
-          this.spinner.succeed(`Project cloned successfully at ${this.chalk.green.bold(info.dest)}`);
+          this.spinner.succeed(`Project cloned successfully at ${chalk.green.bold(info.dest)}`);
         }
       })
-      await emitter.clone(`${process.cwd()}/${answers.destination}`)
-      // await emitter.clone(process.cwd().toString());
+      // await emitter.clone(`${process.cwd()}/${answers.destination}`)
+      
+      if(answers.template === '[DEVELOPER PREVIEW] ComposeDB') {
+        this.spinner.start('Generating Admin Key')
+        const {seed, did} = await this.generateAdminKeyDid()
+        this.spinner.info(did.id)
+        this.spinner.succeed(`${seed} . ${chalk.bold.red('Be sure to save this key somewhere safe.')}`);
+        await this.generateLocalConfig(seed, did, process.cwd())
+      }
     } catch (e) {
       this.spinner.fail((e as Error).message);
       console.error(e)

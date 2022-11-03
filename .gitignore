@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Create Ceramic App generated files
+admin_seed.txt
+composedb.config.json
+.yarn/
+.pnpm*
