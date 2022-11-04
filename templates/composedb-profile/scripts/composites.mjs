@@ -1,3 +1,4 @@
+import { readFileSync } from 'fs';
 import { CeramicClient } from '@ceramicnetwork/http-client'
 import {
   createComposite,
@@ -13,10 +14,14 @@ import { fromString } from "uint8arrays/from-string";
 
 const ceramic = new CeramicClient("http://localhost:7007");
 
+/**
+ * @param {Ora} spinner - to provide progress status.
+ * @return {Promise<void>} - return void when composite finishes deploying.
+ */
 export const writeComposite = async (spinner) => {
   await authenticate()
   spinner.info("writing composite to Ceramic")
-  const composite = await createComposite(ceramic, './scripts/basicProfile.graphql')
+  const composite = await createComposite(ceramic, './composites/basicProfile.graphql')
   await writeEncodedComposite(composite, "./src/__generated__/definition.json");
   spinner.info('creating composite for runtime usage')
   await writeEncodedCompositeRuntime(
@@ -31,11 +36,17 @@ export const writeComposite = async (spinner) => {
   spinner.succeed("composite deployed & ready for use");
 }
 
+/**
+ * Authenticating DID for publishing composite
+ * @return {Promise<void>} - return void when DID is authenticated.
+ */
 const authenticate = async () => {
+  console.log(process.cwd())
+  const seed = readFileSync('./admin-seed.txt')
   const key = fromString(
-    "2da13c1d357fb08d9a2bf0245e431974fde139f9ff4b1b23cb2e73831dfad053",
+    seed,
     "base16"
-  ); // TODO: import adminkey.txt & use that.
+  );
   const did = new DID({
     resolver: getResolver(),
     provider: new Ed25519Provider(key)

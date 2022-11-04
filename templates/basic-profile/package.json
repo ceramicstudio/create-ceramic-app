@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "ceramic daemon --network testnet-clay & next dev",
+    "dev": "npx ceramic daemon --network inmemory & next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

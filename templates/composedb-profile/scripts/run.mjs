@@ -5,59 +5,69 @@ import { EventEmitter } from 'events'
 import { writeComposite } from './composites.mjs';
 
 const events = new EventEmitter()
+const spinner = ora();
 
 const ceramic = spawn("npm", ["run", "ceramic"]);
 ceramic.stdout.on("data", (buffer) => {
   console.log('[Ceramic]', buffer.toString())
   if (buffer.toString().includes("0.0.0.0:7007")) {
     events.emit("ceramic", true);
+    spinner.succeed("ceramic node started");
   }
 })
+
 ceramic.stderr.on('data', (err) => {
   console.error(err.toString())
   events.emit('ceramic', false)
 })
 
-const bootstrap = async (spinner) => {
+process.on("SIGTERM", () => {
+  ceramic.kill();
+});
+process.on("beforeExit", () => {
+  ceramic.kill();
+});
+process.on("exit", () => {
+  ceramic.kill();
+});
+
+const bootstrap = async () => {
   console.log("running bootstrap function")
   try {
+    spinner.info("bootstrapping composites");
     await writeComposite(spinner)
+    spinner.succeed("composites bootstrapped");
   } catch (err) {
-    console.error(err)
+    spinner.fail(err.message)
     ceramic.kill()
   }
 }
 
 const graphiql = async () => {
+  spinner.info("starting graphiql");
   const graphiql = spawn('node', ['./scripts/graphiql.mjs'])
+  spinner.succeed("graphiql started");
   graphiql.stdout.on('data', (buffer) => {
     console.log('[GraphiqQL]',buffer.toString())
   })
 }
+
 const next = async () => {
   const next = spawn('npm', ['run', 'nextDev'])
+  spinner.info("starting nextjs app");
   next.stdout.on('data', (buffer) => {
     console.log('[NextJS]', buffer.toString())
   })
 }
 
-const spinUp = async () => {
-  const spinner = ora()
+const start = async () => {
   try {
     spinner.start('Starting Ceramic node')
     events.on('ceramic', async (isRunning) => {
       if(isRunning) {
-        // throw new Error('Ceramic node failed to start')
-        spinner.succeed('ceramic node started')
-        spinner.info('bootstrapping composites')
-        await bootstrap(spinner)
-        spinner.succeed('composites bootstrapped')
-        spinner.info('starting graphiql')
+        await bootstrap()
         graphiql()
-        spinner.succeed('graphiql started')
-        spinner.info('starting nextjs app')
         next()
-        spinner.succeed('nextjs app started')
       }
       if(isRunning === false) {
         spinner.fail('ceramic node failed to start with error:')
@@ -66,18 +76,8 @@ const spinUp = async () => {
     })
   } catch (err) {
     ceramic.kill()
-    spinner.error(err)
+    spinner.fail(err)
   }
 }
 
-process.on('SIGTERM', () => {
-  ceramic.kill()
-})
-process.on('beforeExit', () => {
-  ceramic.kill()
-})
-process.on('exit', () => {
-  ceramic.kill()
-})
-
-spinUp()
+start()

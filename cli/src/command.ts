@@ -32,7 +32,7 @@ export abstract class Command extends CoreCommand {
   generateLocalConfig = async (adminSeed: string, adminDid:DID, directory: string) => {
     this.spinner.info("Generating ComposeDB configuration file");
     // TODO: update paths to be dynmaic based off of user not use mine.
-    const data =
+    const configData =
       {
         anchor: {},
         "http-api": {
@@ -64,10 +64,10 @@ export abstract class Command extends CoreCommand {
           models: [],
         },
       }
-      console.log('Config data: ', data)
+
       writeFile(
         `${process.cwd()}/${directory}/composedb.config.json`,
-        JSON.stringify(data),
+        JSON.stringify(configData),
         (err) => {
           if (err) {
             console.error(err);
@@ -75,11 +75,13 @@ export abstract class Command extends CoreCommand {
           this.spinner.succeed("ComposeDB file generated successfully.");
         }
       );
-      writeFile(`${process.cwd()}/${directory}/admin_seed.txt`, adminSeed, (err) => {
-        if (err) {
-          console.error(err)
 
+      writeFile(`${process.cwd()}/${directory}/admin_seed.json`, adminSeed,
+        (err) => {
+          if (err) {
+            console.error(err);
+          }
         }
-      })
+      );
   };
 }
