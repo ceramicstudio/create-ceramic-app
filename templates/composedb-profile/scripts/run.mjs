@@ -17,26 +17,18 @@ ceramic.stdout.on("data", (buffer) => {
 })
 
 ceramic.stderr.on('data', (err) => {
-  console.error(err.toString())
-  events.emit('ceramic', false)
+  if(!err.toString().includes('MaxListenersExceededWarning')) {
+    spinner.fail("[Ceramic] Ceramic node failed to start with error:");
+    spinner.fail(`[Ceramic] ${err.toString()}`);
+    events.emit("ceramic", false);
+  }
 })
 
-process.on("SIGTERM", () => {
-  ceramic.kill();
-});
-process.on("beforeExit", () => {
-  ceramic.kill();
-});
-process.on("exit", () => {
-  ceramic.kill();
-});
-
 const bootstrap = async () => {
-  console.log("running bootstrap function")
   try {
-    spinner.info("bootstrapping composites");
+    spinner.info("[Composites] bootstrapping composites");
     await writeComposite(spinner)
-    spinner.succeed("composites bootstrapped");
+    spinner.succeed("Composites] composites bootstrapped");
   } catch (err) {
     spinner.fail(err.message)
     ceramic.kill()
@@ -46,7 +38,7 @@ const bootstrap = async () => {
 const graphiql = async () => {
   spinner.info("starting graphiql");
   const graphiql = spawn('node', ['./scripts/graphiql.mjs'])
-  spinner.succeed("graphiql started");
+  spinner.succeed("[GraphiQL] graphiql started");
   graphiql.stdout.on('data', (buffer) => {
     console.log('[GraphiqQL]',buffer.toString())
   })
@@ -61,6 +53,7 @@ const next = async () => {
 }
 
 const start = async () => {
+  events.setMaxListeners(999)
   try {
     spinner.start('Starting Ceramic node')
     events.on('ceramic', async (isRunning) => {
@@ -70,8 +63,8 @@ const start = async () => {
         next()
       }
       if(isRunning === false) {
-        spinner.fail('ceramic node failed to start with error:')
         ceramic.kill()
+        process.exit()
       }
     })
   } catch (err) {
@@ -81,3 +74,10 @@ const start = async () => {
 }
 
 start()
+
+process.on("SIGTERM", () => {
+  ceramic.kill();
+});
+process.on("beforeExit", () => {
+  ceramic.kill();
+});

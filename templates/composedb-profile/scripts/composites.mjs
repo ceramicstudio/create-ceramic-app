@@ -41,7 +41,6 @@ export const writeComposite = async (spinner) => {
  * @return {Promise<void>} - return void when DID is authenticated.
  */
 const authenticate = async () => {
-  console.log(process.cwd())
   const seed = readFileSync('./admin-seed.txt')
   const key = fromString(
     seed,
