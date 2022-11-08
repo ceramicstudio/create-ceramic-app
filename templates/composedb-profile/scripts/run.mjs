@@ -17,6 +17,7 @@ ceramic.stdout.on("data", (buffer) => {
 })
 
 ceramic.stderr.on('data', (err) => {
+  // TODO: figure out what causes this error in the Ceramic Daemon
   if(!err.toString().includes('MaxListenersExceededWarning')) {
     spinner.fail("[Ceramic] Ceramic node failed to start with error:");
     spinner.fail(`[Ceramic] ${err.toString()}`);
@@ -36,7 +37,7 @@ const bootstrap = async () => {
 }
 
 const graphiql = async () => {
-  spinner.info("starting graphiql");
+  spinner.info("[GraphiQL] starting graphiql");
   const graphiql = spawn('node', ['./scripts/graphiql.mjs'])
   spinner.succeed("[GraphiQL] graphiql started");
   graphiql.stdout.on('data', (buffer) => {
@@ -46,7 +47,7 @@ const graphiql = async () => {
 
 const next = async () => {
   const next = spawn('npm', ['run', 'nextDev'])
-  spinner.info("starting nextjs app");
+  spinner.info("[NextJS] starting nextjs app");
   next.stdout.on('data', (buffer) => {
     console.log('[NextJS]', buffer.toString())
   })
@@ -55,7 +56,7 @@ const next = async () => {
 const start = async () => {
   events.setMaxListeners(999)
   try {
-    spinner.start('Starting Ceramic node')
+    spinner.start('[Ceramic] Starting Ceramic node')
     events.on('ceramic', async (isRunning) => {
       if(isRunning) {
         await bootstrap()
