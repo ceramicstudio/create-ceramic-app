@@ -8,15 +8,7 @@ import { RuntimeCompositeDefinition } from "@composedb/types";
 /**
  * Configure ceramic Client & create context.
  */
-// TODO: set this as an env var & pull from a config file.
 const ceramic = new CeramicClient("http://localhost:7007");
-
-// const composeClient = () => {  
-//   const client = new ComposeClient({
-
-//   })
-//   return client
-// }
 
 const composeClient = new ComposeClient({
   ceramic: "http://localhost:7007",

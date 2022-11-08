@@ -54,7 +54,6 @@ const next = async () => {
 }
 
 const start = async () => {
-  events.setMaxListeners(999)
   try {
     spinner.start('[Ceramic] Starting Ceramic node\n')
     events.on('ceramic', async (isRunning) => {

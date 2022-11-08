@@ -14,8 +14,8 @@ export default class Clone extends Command {
     const templates = {
       "DID-DataStore":
         "https://github.com/ceramicstudio/create-ceramic-app/tree/main/templates/basic-profile",
-        // TODO: update this link
-        "[DEVELOPER PREVIEW] ComposeDB":
+      // TODO: update this link
+      "[DEVELOPER PREVIEW] ComposeDB":
         "https://github.com/ceramicstudio/create-ceramic-app/tree/main/templates/basic-profile",
     };
     
@@ -62,14 +62,14 @@ export default class Clone extends Command {
           this.spinner.succeed(`Project cloned successfully at ${chalk.green.bold(info.dest)}`);
         }
       })
-      // await emitter.clone(`${process.cwd()}/${answers.destination}`)
+      await emitter.clone(`${process.cwd()}/${answers.destination}`)
       
       if(answers.template === '[DEVELOPER PREVIEW] ComposeDB') {
         this.spinner.start('Generating Admin Key')
         const {seed, did} = await this.generateAdminKeyDid()
         this.spinner.info(did.id)
         this.spinner.succeed(`${seed} . ${chalk.bold.red('Be sure to save this key somewhere safe.')}`);
-        await this.generateLocalConfig(seed, did, process.cwd())
+        await this.generateLocalConfig(seed, did, `${answers.destination}`)
       }
     } catch (e) {
       this.spinner.fail((e as Error).message);
