@@ -66,7 +66,7 @@ const Home: NextPage = () => {
               <label>Name</label>
               <input
                 type="text"
-                defaultValue={profile.name}
+                defaultValue={profile?.name || ""}
                 onChange={(e) => {
                   setProfile({ ...profile, name: e.target.value });
                 }}
@@ -76,7 +76,7 @@ const Home: NextPage = () => {
               <label>Description</label>
               <input
                 type="text"
-                defaultValue={profile.description}
+                defaultValue={profile?.description || ""}
                 onChange={(e) => {
                   setProfile({ ...profile, description: e.target.value });
                 }}
@@ -86,7 +86,7 @@ const Home: NextPage = () => {
               <label>Gender</label>
               <input
                 type="text"
-                defaultValue={profile.gender}
+                defaultValue={profile?.gender || ""}
                 onChange={(e) => {
                   setProfile({ ...profile, gender: e.target.value });
                 }}
@@ -96,7 +96,7 @@ const Home: NextPage = () => {
               <label>Emoji</label>
               <input
                 type="text"
-                defaultValue={profile.emoji}
+                defaultValue={profile?.emoji || ""}
                 onChange={(e) => {
                   setProfile({ ...profile, emoji: e.target.value });
                 }}
