@@ -9,6 +9,7 @@
 .title {
   font-weight: regular;
 }
+
 .logo {
   top: 30px;
 }
@@ -26,7 +27,7 @@
 .formGroup input {
   border: 2px solid black;
   color: #333;
-  background-color: #efefef; 
+  /* background-color: #efefef;  */
   border-radius: 5px;
   font-size: 16px;
   padding: 5px 15px;
@@ -66,9 +67,10 @@
   width: 25%;
   text-align: center;
   height: 2px;
-  background-color: black;
+  background-color: #eb4a27;
 }
 .footer div {
+  display: inline-block;
   width: 100%;
   text-align: center;
 }
