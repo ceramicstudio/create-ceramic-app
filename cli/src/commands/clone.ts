@@ -13,10 +13,10 @@ export default class Clone extends Command {
     // TODO: Figure out a better way to do this.
     const templates = {
       "DID-DataStore":
-        "https://github.com/ceramicstudio/create-ceramic-app/tree/main/templates/basic-profile",
+        "https://github.com/ceramicstudio/create-ceramic-app/templates/basic-profile",
       // TODO: update this link
       "[DEVELOPER PREVIEW] ComposeDB":
-        "https://github.com/ceramicstudio/create-ceramic-app/tree/main/templates/basic-profile",
+        "https://github.com/ceramicstudio/create-ceramic-app/templates/composedb-profile",
     };
     
     try {
@@ -49,6 +49,7 @@ export default class Clone extends Command {
       this.spinner.start("cloning...");
       // FUTURE: Allow users to provide their own URL to clone from. If no full url is provided (including a .com/ca/xyz etc) assume it's one of
         // our defaults & use the appropriate URL.
+      console.log(answers.template)
       const emitter = degit(
         templates[answers.template],
         {
@@ -58,10 +59,12 @@ export default class Clone extends Command {
       );
       
       emitter.on('info', info => {
+        console.log(info)
         if(info.code === 'SUCCESS') {
           this.spinner.succeed(`Project cloned successfully at ${chalk.green.bold(info.dest)}`);
         }
       })
+
       await emitter.clone(`${process.cwd()}/${answers.destination}`)
       
       if(answers.template === '[DEVELOPER PREVIEW] ComposeDB') {

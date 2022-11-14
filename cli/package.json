@@ -1,9 +1,11 @@
 {
-  "name": "create-ceramic",
-  "version": "0.0.0",
+  "name": "@ceramicstudio/create-ceramic-app",
+  "version": "0.1.0",
   "description": "oclif example Hello World CLI",
   "author": "3Box Labs",
-  "bin": "./bin/run.js",
+  "bin": {
+    "create-ceramic-app": "bin/run.js"
+  },
   "homepage": "https://github.com/Sterahi/hello-world",
   "license": "MIT",
   "main": "dist/index.js",
@@ -11,7 +13,10 @@
   "exports": {
     ".": "./dist/index.js"
   },
-  "repository": "Sterahi/hello-world",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sterahi/hello-world.git"
+  },
   "files": [
     "/bin",
     "/dist",
@@ -82,9 +87,16 @@
   "engines": {
     "node": ">=12.0.0"
   },
-  "bugs": "https://github.com/Sterahi/hello-world/issues",
+  "bugs": {
+    "url": "https://github.com/ceramicstudio/create-ceramic-app/issues"
+  },
   "keywords": [
-    "oclif"
+    "oclif",
+    "ceramic",
+    "composedb"
   ],
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "directories": {
+    "test": "test"
+  }
 }
