@@ -8,6 +8,7 @@ import { toString } from 'uint8arrays/to-string';
 import { writeFile } from 'fs';
 import { DID } from 'dids';
 import { Ed25519Provider } from 'key-did-provider-ed25519';
+import {homedir} from "os"
 
 export abstract class Command extends CoreCommand {
   spinner!: Ora;
@@ -31,38 +32,37 @@ export abstract class Command extends CoreCommand {
 
   generateLocalConfig = async (adminSeed: string, adminDid:DID, directory: string) => {
     this.spinner.info("Generating ComposeDB configuration file");
-    const configData =
-      {
-        anchor: {},
-        "http-api": {
-          "cors-allowed-origins": [".*"],
-          "admin-dids": [adminDid.id]
-        },
-        ipfs: {
-          mode: "bundled",
-        },
-        logger: {
-          "log-level": 2,
-          "log-to-files": false,
-        },
-        metrics: {
-          "metrics-exporter-enabled": false,
-          "metrics-port": 9090,
-        },
-        network: {
-          name: "testnet-clay",
-        },
-        node: {},
-        "state-store": {
-          mode: "fs",
-          "local-directory": `~/.ceramic/statestore/`,
-        },
-        indexing: {
-          db: "sqlite://~/.ceramic/indexing.sqlite",
-          "allow-queries-before-historical-sync": true,
-          models: [],
-        },
-      }
+    const configData = {
+      anchor: {},
+      "http-api": {
+        "cors-allowed-origins": [".*"],
+        "admin-dids": [adminDid.id],
+      },
+      ipfs: {
+        mode: "bundled",
+      },
+      logger: {
+        "log-level": 2,
+        "log-to-files": false,
+      },
+      metrics: {
+        "metrics-exporter-enabled": false,
+        "metrics-port": 9090,
+      },
+      network: {
+        name: "testnet-clay",
+      },
+      node: {},
+      "state-store": {
+        mode: "fs",
+        "local-directory": `~/.ceramic/statestore/`,
+      },
+      indexing: {
+        db: `sqlite://${homedir()}/.ceramic/indexing.sqlite`,
+        "allow-queries-before-historical-sync": true,
+        models: [],
+      },
+    };
 
       writeFile(
         `${process.cwd()}/${directory}/composedb.config.json`,
