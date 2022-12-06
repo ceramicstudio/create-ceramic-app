@@ -6,6 +6,12 @@ First, run the development server:
 npm run dev
 ```
 
+If you have already configured a Ceramic node that you'd rather use please use the following command:
+
+```bash
+npm run dev -- -g
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Learn More

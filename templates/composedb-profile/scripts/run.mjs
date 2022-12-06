@@ -10,8 +10,6 @@ const args = process.argv.slice(2)
 
 let ceramic
 
-console.log(process.argv)
-
 if(args.includes('-g') || args.includes('--global')) {
   ceramic = spawn("npm", ["run", `ceramic:local`]);
 } else {
