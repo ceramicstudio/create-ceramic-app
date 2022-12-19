@@ -3,7 +3,7 @@
 ## Folders
 | Name      | Description                                                                                     |
 |--------------------------|-------------------------------------------------------------------------------------------------|
-| [CLI](./cli)             | The Comand Line utility that clones templates & provides utlities for ComposeDB based projects. |
+| [CLI](./cli)             | The Command Line utility that clones templates & provides utlities for ComposeDB based projects. |
 | [Templates](./templates) | The templates that the CLI utility will clone.                                                  |
 
 ## Maintainers
