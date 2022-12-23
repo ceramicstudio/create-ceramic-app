@@ -1,6 +1,6 @@
 {
   "name": "@ceramicnetwork/create-ceramic-app",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "oclif example Hello World CLI",
   "author": "3Box Labs",
   "bin": {

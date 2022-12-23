@@ -6,8 +6,16 @@ import { writeComposite } from './composites.mjs';
 
 const events = new EventEmitter()
 const spinner = ora();
+const args = process.argv.slice(2)
 
-const ceramic = spawn("npm", ["run", "ceramic"]);
+let ceramic
+
+if(args.includes('-g') || args.includes('--global')) {
+  ceramic = spawn("npm", ["run", `ceramic:local`]);
+} else {
+  ceramic = spawn("npm", ["run", `ceramic ${args.includes('-l')}`]);
+}
+
 ceramic.stdout.on("data", (buffer) => {
   console.log('[Ceramic]', buffer.toString())
   if (buffer.toString().includes("0.0.0.0:7007")) {
