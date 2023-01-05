@@ -3,6 +3,7 @@ import inquirer from 'inquirer'
 import chalk from 'chalk'
 
 import { Command } from "../command.js"
+import { exec } from "node:child_process"
 
 export default class Clone extends Command {
 
@@ -45,8 +46,6 @@ export default class Clone extends Command {
       ])
 
       this.spinner.start("cloning...");
-      // FUTURE: Allow users to provide their own URL to clone from. If no full url is provided (including a .com/ca/xyz etc) assume it's one of
-        // our defaults & use the appropriate URL.
       const emitter = degit(
         templates[answers.template],
         {
@@ -55,9 +54,17 @@ export default class Clone extends Command {
         }
       );
       
-      emitter.on('info', info => {
+      emitter.on('info', async (info) => {
         if(info.code === 'SUCCESS') {
           this.spinner.succeed(`Project cloned successfully at ${chalk.green.bold(info.dest)}`);
+          const composeDb = await this.usesComposeDB(answers.destination)
+          if(composeDb) {
+            this.spinner.info('ComposeDB detected, updating scripts.')
+            await this.updateScripts(answers.destination)
+            await this.generateScriptFiles(answers.destination)
+          }
+          this.spinner.start('Installing dependencies')
+          exec(`cd ${process.cwd()}/${answers.destination} && npm install`)
         }
       })
 

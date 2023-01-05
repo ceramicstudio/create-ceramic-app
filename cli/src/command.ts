@@ -5,10 +5,13 @@ import { Command as CoreCommand } from '@oclif/core'
 import type { Ora } from 'ora'
 import { randomBytes } from 'crypto';
 import { toString } from 'uint8arrays/to-string';
-import { writeFile } from 'fs';
+import { readFileSync, existsSync, mkdirSync } from 'fs';
+import { readdir, writeFile } from "node:fs/promises"
+
 import { DID } from 'dids';
 import { Ed25519Provider } from 'key-did-provider-ed25519';
-import {homedir} from "os"
+import { homedir } from "os"
+
 
 export abstract class Command extends CoreCommand {
   spinner!: Ora;
@@ -24,11 +27,25 @@ export abstract class Command extends CoreCommand {
     const did = new DID({
       provider: new Ed25519Provider(seed),
       resolver: { ...keyResolver },
-    });
+    })
 
     await did.authenticate()
     return {seed:toString(seed, 'base16'), did}
-  };
+  }
+
+  usesComposeDB = async (directory: string): Promise<boolean> => {
+    try {
+      const pkg = readFileSync(`${process.cwd()}/${directory}/package.json`)
+
+      if(pkg.includes('@composedb')) {
+        return true
+      }
+      return false
+    } catch (e) {
+      this.spinner.fail((e as Error).message)
+      throw e
+    }
+  }
 
   generateLocalConfig = async (adminSeed: string, adminDid:DID, directory: string) => {
     this.spinner.info("Generating ComposeDB configuration file");
@@ -82,5 +99,50 @@ export abstract class Command extends CoreCommand {
           }
         }
       );
-  };
+  }
+
+  generateScriptFiles = async (directory: string): Promise<void> => {
+    const sourceTemplates = './TemplateScripts'
+    const scripts = await readdir(sourceTemplates)
+    let file = ''
+
+    if(!existsSync(`${process.cwd()}/${directory}/scripts`)) {
+      this.spinner.info('Creating /scripts directory')
+      mkdirSync(`${process.cwd()}/${directory}/scripts`)
+    }
+
+    this.spinner.info('Generating scripts...')
+    for(const script in scripts) {
+      file = readFileSync(`${sourceTemplates}/${scripts[script]}`).toString()
+      await writeFile(`${directory}/scripts/${scripts[script]}`, file)
+    }
+    this.spinner.succeed('Scripts created successfully!')
+  }
+
+  updateScripts = async (directory: string): Promise<void> => {
+    // update script key in package.json
+    const original = JSON.parse(readFileSync(`${process.cwd()}/${directory}/package.json`).toString())
+    const scripts = original?.scripts
+    const updated = {...original, ...scripts}
+
+    this.spinner.info('Updating package.json to use new scripts')
+    this.spinner.info(`Prior package.json has been moved to ${process.cwd()}/${directory}/package.json.bak`)
+
+    scripts["nextDev"] = scripts.dev
+    scripts["dev"] = "node scripts/run.mjs"
+    scripts["ceramic"] = "CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB='true' npx ceramic daemon --config ./composedb.config.json"
+    scripts["ceramic:local"] = "CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB='true' npx ceramic daemon"
+
+    writeFile(`${process.cwd()}/${directory}/package.json`, JSON.stringify(updated, null, 2), (err) => {
+      if(err){
+        console.error(err.message)
+      }
+    })
+    writeFile(`${process.cwd()}/${directory}/package.json.bak`, JSON.stringify(original, null, 2), err => {
+      if(err){
+        console.error(err.message)
+      }
+    })
+    this.spinner.succeed('Scripts updated successfully.')
+  }
 }
