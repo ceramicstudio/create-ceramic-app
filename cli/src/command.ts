@@ -102,8 +102,10 @@ export abstract class Command extends CoreCommand {
   }
 
   generateScriptFiles = async (directory: string): Promise<void> => {
+    const {seed, did} = await this.generateAdminKeyDid()
     const sourceTemplates = './TemplateScripts'
     const scripts = await readdir(sourceTemplates)
+    
     let file = ''
 
     if(!existsSync(`${process.cwd()}/${directory}/scripts`)) {
@@ -116,6 +118,7 @@ export abstract class Command extends CoreCommand {
       file = readFileSync(`${sourceTemplates}/${scripts[script]}`).toString()
       await writeFile(`${directory}/scripts/${scripts[script]}`, file)
     }
+    await this.generateLocalConfig(seed, did, directory)
     this.spinner.succeed('Scripts created successfully!')
   }
 
