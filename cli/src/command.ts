@@ -5,13 +5,10 @@ import { Command as CoreCommand } from '@oclif/core'
 import type { Ora } from 'ora'
 import { randomBytes } from 'crypto';
 import { toString } from 'uint8arrays/to-string';
-import { readFileSync, existsSync, mkdirSync } from 'fs';
-import { readdir, writeFile } from "node:fs/promises"
-
+import { writeFile } from 'fs';
 import { DID } from 'dids';
 import { Ed25519Provider } from 'key-did-provider-ed25519';
-import { homedir } from "os"
-
+import {homedir} from "os"
 
 export abstract class Command extends CoreCommand {
   spinner!: Ora;
@@ -27,25 +24,11 @@ export abstract class Command extends CoreCommand {
     const did = new DID({
       provider: new Ed25519Provider(seed),
       resolver: { ...keyResolver },
-    })
+    });
 
     await did.authenticate()
     return {seed:toString(seed, 'base16'), did}
-  }
-
-  usesComposeDB = async (directory: string): Promise<boolean> => {
-    try {
-      const pkg = readFileSync(`${process.cwd()}/${directory}/package.json`)
-
-      if(pkg.includes('@composedb')) {
-        return true
-      }
-      return false
-    } catch (e) {
-      this.spinner.fail((e as Error).message)
-      throw e
-    }
-  }
+  };
 
   generateLocalConfig = async (adminSeed: string, adminDid:DID, directory: string) => {
     this.spinner.info("Generating ComposeDB configuration file");

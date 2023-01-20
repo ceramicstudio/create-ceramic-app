@@ -38,7 +38,7 @@ export const writeComposite = async (spinner) => {
 
 /**
  * Authenticating DID for publishing composite
- * @return {Promise<void>} - return when DID is authenticated.
+ * @return {Promise<void>} - return void when DID is authenticated.
  */
 const authenticate = async () => {
   const seed = readFileSync('./admin_seed.txt')
