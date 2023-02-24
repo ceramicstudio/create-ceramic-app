@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "firstTime": "npx aws-sdk-js-codemod -t v2-to-v3 .",
     "dev": "node scripts/run.mjs",
     "nextDev": "next dev",
     "ceramic": "CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB='true' ceramic daemon --config ./composedb.config.json",
@@ -12,8 +13,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.278.0",
     "@ceramicnetwork/blockchain-utils-linking": "2.11.0",
-    "@ceramicnetwork/cli": "^2.20.0",
+    "@ceramicnetwork/cli": "^2.22.0",
     "@ceramicnetwork/common": "2.20.0",
     "@ceramicnetwork/http-client": "2.17.0",
     "@composedb/client": "0.4.0",
