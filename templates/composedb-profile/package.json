@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node scripts/run.mjs",
     "nextDev": "next dev",
-    "ceramic": "CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB='true' npx @ceramicnetwork/cli daemon --config ./composedb.config.json",
+    "ceramic": "CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB='true' ceramic daemon --config ./composedb.config.json",
     "ceramic:local": "CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB='true' npx @ceramicnetwork/cli daemon",
     "build": "next build",
     "start": "next start",
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@ceramicnetwork/blockchain-utils-linking": "2.11.0",
+    "@ceramicnetwork/cli": "^2.20.0",
     "@ceramicnetwork/common": "2.20.0",
     "@ceramicnetwork/http-client": "2.17.0",
     "@composedb/client": "0.4.0",
