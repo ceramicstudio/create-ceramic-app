@@ -3,13 +3,33 @@ import inquirer from 'inquirer'
 import chalk from 'chalk'
 
 import { Command } from "../command.js"
+import { spawn } from "node:child_process"
+import { Flags } from "@oclif/core"
+
 
 export default class Clone extends Command {
 
   static description = "Clones existing repo"
-  static flags = Command.flags
+
+  static flags = {
+    ...Command.flags,
+    repo: Flags.string({description: 'Github Template Repo', char: 'r'})
+  }
 
   async run(): Promise<void> {
+    const {flags} = await this.parse(Clone)
+    var repository = flags.repo || ''
+
+    if(flags.repo?.includes('github.com')) {
+      if(repository.includes('tree')) {
+        const split = repository.split('https://')[1].split('/')
+        split.splice(split.indexOf('tree'), 2)
+        repository = `https://${split.join('/')}`
+      }
+    } else if (flags.repo !== undefined) {
+      this.spinner.fail('Only GitHub repositories are supported at this time.')
+    }
+
     const templates = {
       "DID-DataStore":
         "https://github.com/ceramicstudio/create-ceramic-app/templates/basic-profile",
@@ -18,22 +38,24 @@ export default class Clone extends Command {
     };
     
     try {
-      const answers = await inquirer.prompt([
-        {
-          type: 'input',
-          name: 'destination',
-          message: 'Project name: ',
-          validate(value) {
-            const pass = value.match(
-              /[^\s-]$/i
-            );
-            if (pass) {
-              return true;
-            }
-
-            return "Sorry, name can only contain URL-friendly characters.";
+      const questions: Array<{}> = [{
+        type: 'input',
+        name: 'destination',
+        message: 'Project name: ',
+        validate(value:string) {
+          const pass = value.match(
+            /[^\s-]$/i
+          );
+          if (pass) {
+            return true;
           }
-        }, {
+
+          return "Sorry, name can only contain URL-friendly characters.";
+        }
+      }]
+
+      if(!flags.repo) {       
+        questions.push({
           type: 'list',
           name: 'template',
           message:'Choose your Template',
@@ -41,35 +63,33 @@ export default class Clone extends Command {
             'DID-DataStore',
             '[DEVELOPER PREVIEW] ComposeDB'
           ]
-        }
-      ])
+        })
+      }
+      
+      const answers = await inquirer.prompt(questions)
 
-      this.spinner.start("cloning...");
-      // FUTURE: Allow users to provide their own URL to clone from. If no full url is provided (including a .com/ca/xyz etc) assume it's one of
-        // our defaults & use the appropriate URL.
+      this.spinner.start(`Cloning ${(repository || templates[answers.template])}`);
       const emitter = degit(
-        templates[answers.template],
+        // (repository || templates[answers.template] ),
+        (templates[answers.template] || repository),
         {
           cache: false,
           force: false,
+          verbose: true
         }
       );
-      
-      emitter.on('info', info => {
-        if(info.code === 'SUCCESS') {
-          this.spinner.succeed(`Project cloned successfully at ${chalk.green.bold(info.dest)}`);
-        }
-      })
 
       await emitter.clone(`${process.cwd()}/${answers.destination}`)
+      this.spinner.succeed(`Project cloned successfully at ${chalk.green.bold(`${process.cwd()}/${answers.destination}`)}`);
       
-      if(answers.template === '[DEVELOPER PREVIEW] ComposeDB') {
-        this.spinner.start('Generating Admin Key')
-        const {seed, did} = await this.generateAdminKeyDid()
-        this.spinner.info(did.id)
-        this.spinner.succeed(`${seed} . ${chalk.bold.red('Be sure to save this key somewhere safe.')}`);
-        await this.generateLocalConfig(seed, did, `${answers.destination}`)
+      const composeDb = await this.usesComposeDB(answers.destination)
+      if(composeDb) {
+        this.spinner.info('ComposeDB detected, updating scripts.')
+        this.updateScripts(answers.destination)
+        this.generateScriptFiles(answers.destination)
       }
+      spawn('npm', ['install', '--prefix', `${process.cwd()}/${answers.destination}`], { stdio: 'inherit' })
+      
     } catch (e) {
       this.spinner.fail((e as Error).message);
       console.error(e)
