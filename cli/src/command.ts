@@ -82,53 +82,5 @@ export abstract class Command extends CoreCommand {
           }
         }
       );
-  }
-
-  generateScriptFiles = async (directory: string): Promise<void> => {
-    const {seed, did} = await this.generateAdminKeyDid()
-    const sourceTemplates = './TemplateScripts'
-    const scripts = await readdir(sourceTemplates)
-    
-    let file = ''
-
-    if(!existsSync(`${process.cwd()}/${directory}/scripts`)) {
-      this.spinner.info('Creating /scripts directory')
-      mkdirSync(`${process.cwd()}/${directory}/scripts`)
-    }
-
-    this.spinner.info('Generating scripts...')
-    for(const script in scripts) {
-      file = readFileSync(`${sourceTemplates}/${scripts[script]}`).toString()
-      await writeFile(`${directory}/scripts/${scripts[script]}`, file)
-    }
-    await this.generateLocalConfig(seed, did, directory)
-    this.spinner.succeed('Scripts created successfully!')
-  }
-
-  updateScripts = async (directory: string): Promise<void> => {
-    // update script key in package.json
-    const original = JSON.parse(readFileSync(`${process.cwd()}/${directory}/package.json`).toString())
-    const scripts = original?.scripts
-    const updated = {...original, ...scripts}
-
-    this.spinner.info('Updating package.json to use new scripts')
-    this.spinner.info(`Prior package.json has been moved to ${process.cwd()}/${directory}/package.json.bak`)
-
-    scripts["nextDev"] = scripts.dev
-    scripts["dev"] = "node scripts/run.mjs"
-    scripts["ceramic"] = "CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB='true' npx ceramic daemon --config ./composedb.config.json"
-    scripts["ceramic:local"] = "CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB='true' npx ceramic daemon"
-
-    writeFile(`${process.cwd()}/${directory}/package.json`, JSON.stringify(updated, null, 2), (err) => {
-      if(err){
-        console.error(err.message)
-      }
-    })
-    writeFile(`${process.cwd()}/${directory}/package.json.bak`, JSON.stringify(original, null, 2), err => {
-      if(err){
-        console.error(err.message)
-      }
-    })
-    this.spinner.succeed('Scripts updated successfully.')
-  }
+  };
 }
