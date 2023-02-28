@@ -17,15 +17,13 @@ ceramic.stdout.on("data", (buffer) => {
 })
 
 ceramic.stderr.on('data', (err) => {
-  // TODO: figure out what causes this error in the Ceramic Daemon
-  if(!err.toString().includes('MaxListenersExceededWarning')) {
-    spinner.fail("[Ceramic] Ceramic node failed to start with error:");
-    spinner.fail(`[Ceramic] ${err.toString()}`);
-    events.emit("ceramic", false);
-  }
+  console.log(err.toString())
 })
 
 const bootstrap = async () => {
+  // TODO: convert to event driven to ensure functions run in correct orders after releasing the bytestream.
+  // TODO: check if .grapql files match their .json counterparts
+  //       & do not create the model if it already exists & has not been updated
   try {
     spinner.info("[Composites] bootstrapping composites");
     await writeComposite(spinner)
@@ -33,6 +31,7 @@ const bootstrap = async () => {
   } catch (err) {
     spinner.fail(err.message)
     ceramic.kill()
+    throw err
   }
 }
 
@@ -57,10 +56,10 @@ const start = async () => {
   try {
     spinner.start('[Ceramic] Starting Ceramic node\n')
     events.on('ceramic', async (isRunning) => {
-      if(isRunning) {
+      if (isRunning) {
         await bootstrap()
-        graphiql()
-        next()
+        await graphiql()
+        await next()
       }
       if(isRunning === false) {
         ceramic.kill()
