@@ -8,6 +8,14 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Notes
+
+If you see any errors during `npm run dev` try installing `@ceramicnetwork/cli` globally.
+
+```bash
+npm add -g @ceramicnetwork/cli
+```
+
 ## Learn More
 
 To learn more about Ceramic please visit the following links
