@@ -24,7 +24,7 @@ export const authenticateCeramic = async (ceramic: CeramicApi, compose: ComposeC
 
   if(!session || (session.hasSession && session.isExpired)) {
     if (window.ethereum === null || window.ethereum === undefined) {
-      throw new Error("No injected Ethereum provider found.");
+      throw new Error("No Ethereum provider found. Please install an Ethereum web wallet to authenticate.");
     }
 
     // We enable the ethereum provider to get the user's addresses.

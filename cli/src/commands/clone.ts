@@ -11,12 +11,12 @@ export default class Clone extends Command {
 
   async run(): Promise<void> {
     const templates = {
-      "DID-DataStore":
+      "Ceramic":
         "https://github.com/ceramicstudio/create-ceramic-app/templates/basic-profile",
-      "[DEVELOPER PREVIEW] ComposeDB":
+      "ComposeDB":
         "https://github.com/ceramicstudio/create-ceramic-app/templates/composedb-profile",
     };
-    
+
     try {
       const answers = await inquirer.prompt([
         {
@@ -38,8 +38,8 @@ export default class Clone extends Command {
           name: 'template',
           message:'Choose your Template',
           choices: [
-            'DID-DataStore',
-            '[DEVELOPER PREVIEW] ComposeDB'
+            'Ceramic',
+            'ComposeDB'
           ]
         }
       ])
@@ -54,7 +54,7 @@ export default class Clone extends Command {
           force: false,
         }
       );
-      
+
       emitter.on('info', info => {
         if(info.code === 'SUCCESS') {
           this.spinner.succeed(`Project cloned successfully at ${chalk.green.bold(info.dest)}`);
@@ -62,7 +62,7 @@ export default class Clone extends Command {
       })
 
       await emitter.clone(`${process.cwd()}/${answers.destination}`)
-      
+
       if(answers.template === '[DEVELOPER PREVIEW] ComposeDB') {
         this.spinner.start('Generating Admin Key')
         const {seed, did} = await this.generateAdminKeyDid()
