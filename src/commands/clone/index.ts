@@ -74,7 +74,7 @@ export default class DefaultCommand extends Command {
     
     If you want to configure all these aspects of your Ceramic environment,
     please use Wheel to generate a development environment.
-    Instructions for Wheel: ${bgBlue('https://composedb.js.org/docs/0.5.x/set-up-your-environment')}
+    Instructions for Wheel: ${bgBlue('https://developers.ceramic.network/docs/composedb/set-up-your-environment')}
     `
     note(infoMsg)
 
