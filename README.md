@@ -38,7 +38,7 @@ The example app runs Ceramic locally, in memory. This is the easiest and the fas
 
 To properly configure all the aspects of your Ceramic environment for this, please use Wheel to generate a development environment.
 
-Instructions for Wheel: [https://composedb.js.org/docs/0.5.x/set-up-your-environment](https://composedb.js.org/docs/0.5.x/set-up-your-environment)
+[Instructions for Wheel](https://developers.ceramic.network/docs/composedb/set-up-your-environment#installation-using-wheel)
 
 ## Contributing
 
