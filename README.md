@@ -9,7 +9,7 @@ CLI for downloading, installing and launching a ComposeDB Example App from Ceram
 Run this command to create a new example app:
 
 ```sh-session
-npx @ceramicnetwork/create-ceramic-app
+npx create-ceramic-app
 ```
 
 You will be guided through the process and in the end you'll have a new folder with your app.
