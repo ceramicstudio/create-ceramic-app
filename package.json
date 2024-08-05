@@ -9,17 +9,17 @@
   "dependencies": {
     "@clack/core": "^0.3.3",
     "@clack/prompts": "^0.7.0",
-    "@oclif/core": "^3",
-    "@oclif/plugin-help": "^5",
-    "@oclif/plugin-plugins": "^4",
+    "@oclif/core": "^4",
+    "@oclif/plugin-help": "^6",
+    "@oclif/plugin-plugins": "^5",
     "picocolors": "^1.0.0",
-    "tiged": "^2.12.5"
+    "simple-git": "^3.25.0"
   },
   "devDependencies": {
     "@oclif/prettier-config": "^0.2.1",
-    "@oclif/test": "^3",
+    "@oclif/test": "^4",
     "@types/chai": "^4",
-    "@types/mocha": "^9.0.0",
+    "@types/mocha": "^10",
     "@types/node": "^18",
     "chai": "^4",
     "eslint": "^8.52.0",
@@ -27,11 +27,12 @@
     "eslint-config-oclif-typescript": "^3",
     "eslint-config-prettier": "^9.0.0",
     "mocha": "^10",
-    "oclif": "^3.17.2",
+    "oclif": "^4",
     "shx": "^0.3.4",
     "ts-node": "^10.9.1",
     "typescript": "^5"
   },
+  "type": "module",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -45,19 +46,16 @@
   "main": "dist/index.js",
   "oclif": {
     "bin": "create-ceramic-app",
-    "default": "clone",
+    "hooks": {
+      "init": "./dist/hooks/init"
+    },
     "dirname": "create-ceramic-app",
     "commands": "./dist/commands",
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-plugins"
     ],
-    "topicSeparator": " ",
-    "topics": {
-      "clone": {
-        "description": "Create a sample app with Ceramic and ComposeDB"
-      }
-    }
+    "topicSeparator": " "
   },
   "repository": "git+https://github.com/ceramicstudio/create-ceramic-app.git",
   "scripts": {

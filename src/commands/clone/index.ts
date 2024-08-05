@@ -1,16 +1,22 @@
-import {cancel, intro, isCancel, note, outro, select, spinner, text} from '@clack/prompts'
 import {Command} from '@oclif/core'
 import {execSync} from 'node:child_process'
-import {bgBlue, bgGreen, black, green, inverse} from 'picocolors'
-const tiged = require('tiged')
+import fs from 'node:fs';
+import path from 'node:path';
+import picocolors from 'picocolors'
+const { bgBlue, bgGreen, black, green, inverse } = picocolors;
 
-export default class DefaultCommand extends Command {
+import {simpleGit} from 'simple-git'
+
+
+export default class Clone extends Command {
+  static description = "Create a sample app with Ceramic and ComposeDB"
+
   async run(): Promise<void> {
     this.log(' ')
+    const clack = await import('@clack/prompts');
+    const sp = clack.spinner()
 
-    const sp = spinner()
-
-    intro(`${bgGreen(black(' 🧡 Welcome! Let us build you a ComposeDB example app. '))}`)
+    clack.intro(`${bgGreen(black(' 🧡 Welcome! Let us build you a ComposeDB example app. '))}`)
 
     // picocolors options:
     // bold, dim, italic, underline, inverse, hidden, strikethrough,
@@ -18,7 +24,7 @@ export default class DefaultCommand extends Command {
     // bgBlack, bgRed, bgGreen, bgYellow, bgBlue, bgMagenta, bgCyan, bgWhite
 
     const getProjectName = async (message: string, defaultName: string): Promise<string> => {
-      const projectName = await text({
+      const projectName = await clack.text({
         message,
         placeholder: defaultName,
         validate(value: string = ''): string | void {
@@ -30,9 +36,9 @@ export default class DefaultCommand extends Command {
           return undefined
         },
       })
-      if (isCancel(projectName)) {
-        cancel('Canceling.')
-        process.exit(0)
+      if (clack.isCancel(projectName)) {
+        clack.cancel('Canceling.')
+        throw process.exit(0)
       }
 
       return (projectName || defaultName).toLowerCase()
@@ -43,9 +49,14 @@ export default class DefaultCommand extends Command {
     // Clone repository from https://github.com/ceramicstudio/ComposeDbExampleApp.git
     sp.start('Cloning CeramicDB Example App from repository...')
     try {
-      await tiged('https://github.com/ceramicstudio/ComposeDbExampleApp.git').clone(projectName)
+      const git = simpleGit();
+      await git.clone('https://github.com/ceramicstudio/ComposeDbExampleApp.git', projectName, ['--depth', '1'])
+      // Remove the .git directory to avoid keeping the git history
+      fs.rmSync(path.join(projectName, '.git'), { force: true, recursive: true });
     } catch (error) {
       console.error('Error occurred while cloning the repository:', error)
+      sp.stop("Failed to clone repository")
+      return;
     }
 
     sp.stop(green('✅ Repository cloned. ⬇️  Now installing dependencies...'))
@@ -76,9 +87,9 @@ export default class DefaultCommand extends Command {
     please use Wheel to generate a development environment.
     Instructions for Wheel: ${bgBlue('https://developers.ceramic.network/docs/composedb/set-up-your-environment')}
     `
-    note(infoMsg)
+    clack.note(infoMsg)
 
-    const readyToLaunch = await select({
+    const readyToLaunch = await clack.select({
       message: '🎉  Your Ceramic app with ComposeDB is ready! Ready to launch it now?',
       initialValue: 'Yes',
       options: [
@@ -87,9 +98,9 @@ export default class DefaultCommand extends Command {
       ],
     })
 
-    if (readyToLaunch == 'Yes') {
+    if (readyToLaunch === 'Yes') {
       // Launch the example app
-      outro('🏎️  Launching your example app...')
+      clack.outro('🏎️  Launching your example app...')
 
       try {
         process.chdir(projectName)
@@ -99,7 +110,7 @@ export default class DefaultCommand extends Command {
       }
     } else {
       // Don't launch the example app. Explain how to launch it manually.
-      note(`
+      clack.note(`
       You don't have to launch the example app right now. You can do it later. It's easy!
 
       Here's how to launch the example app manually, when you're ready:
@@ -108,7 +119,7 @@ export default class DefaultCommand extends Command {
       3. Open ${bgBlue('http://localhost:3000')} in your browser
       4. 🎉  Enjoy!
       `)
-      outro(`${bgBlue(`🙏 Thanks and happy coding!`)}`)
+      clack.outro(`${bgBlue(`🙏 Thanks and happy coding!`)}`)
     }
   }
 }
