@@ -79,15 +79,15 @@ export default class DefaultCommand extends Command {
     note(infoMsg)
 
     const readyToLaunch = await select({
-      message: '🎉  Your Ceramic app with ComposeDB is ready! Ready to launch it now?',
       initialValue: 'Yes',
+      message: '🎉  Your Ceramic app with ComposeDB is ready! Ready to launch it now?',
       options: [
         {label: 'Yes', value: 'Yes'},
         {label: 'No', value: 'No'},
       ],
     })
 
-    if (readyToLaunch == 'Yes') {
+    if (readyToLaunch === 'Yes') {
       // Launch the example app
       outro('🏎️  Launching your example app...')
 
